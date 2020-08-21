@@ -23,5 +23,5 @@ Für eine vollständig Dokumentation (in englischer Sprache) siehe https://www.m
 
 ### Lizenzbestimmungen ###
 
-Makaira und Makaira OXID Connect unterliegen den Bestimmungen der Marmalade Kauflizenz.  
+Makaira und Makaira OXID Connect unterliegen den Bestimmungen der Makaira Kauflizenz.  
 
