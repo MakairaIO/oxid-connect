@@ -18,6 +18,7 @@
     }
   },
   "require": {
+    "composer/installers": "^1.9.0",
     "makaira/shared-libs": "^2020.3.1"
   },
   "extra": {
