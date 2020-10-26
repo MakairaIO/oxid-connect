@@ -10,7 +10,7 @@ class makaira_cookie_utils
             self::$bannerEnabled = oxRegistry::get('oxconfig')->getShopConfVar(
                 'makaira_cookie_banner_enabled',
                 null,
-                oxConfig::OXMODULE_MODULE_PREFIX
+                oxConfig::OXMODULE_MODULE_PREFIX . 'makaira/connect'
             );
         }
 
