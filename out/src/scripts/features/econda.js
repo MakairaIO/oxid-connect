@@ -80,6 +80,7 @@ function initEcondaCookie() {
         hDeleteCookie("mak_econda_session");
     }
 }
+
 document.addEventListener('DOMContentLoaded', function () {
     setTimeout(initEcondaCookie, 500);
 });
