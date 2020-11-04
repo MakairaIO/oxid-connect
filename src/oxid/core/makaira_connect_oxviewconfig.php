@@ -18,6 +18,8 @@ class makaira_connect_oxviewconfig extends makaira_connect_oxviewconfig_parent
 
     private static $econdaClientKey;
 
+    private static $econdaContainerId;
+
     /**
      * @var string
      */
@@ -104,6 +106,19 @@ class makaira_connect_oxviewconfig extends makaira_connect_oxviewconfig_parent
         }
 
         return self::$econdaClientKey;
+    }
+
+    public function getEcondaContainerId()
+    {
+        if (null === self::$econdaContainerId) {
+            self::$econdaContainerId = oxRegistry::getConfig()->getShopConfVar(
+                'makaira_connect_econda_cid',
+                null,
+                oxConfig::OXMODULE_MODULE_PREFIX . 'makaira/connect'
+            );
+        }
+
+        return self::$econdaContainerId;
     }
 
     public function resetMakairaFilter($type, $ident)
