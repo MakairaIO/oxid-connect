@@ -30,7 +30,7 @@ function hReadCookie(name) {
 }
 
 function hDeleteCookie(name) {
-    createCookie(name, "", -1);
+    hCreateCookie(name, "", -1);
 }
 
 function initEcondaCookie() {
@@ -80,5 +80,7 @@ function initEcondaCookie() {
         hDeleteCookie("mak_econda_session");
     }
 }
+document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(initEcondaCookie, 500);
+});
 
-setTimeout(initEcondaCookie, 500);
