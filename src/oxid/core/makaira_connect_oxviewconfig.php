@@ -16,6 +16,8 @@ class makaira_connect_oxviewconfig extends makaira_connect_oxviewconfig_parent
 
     protected $generatedFilterUrl = [];
 
+    private static $econdaClientKey;
+
     /**
      * @var string
      */
@@ -89,6 +91,19 @@ class makaira_connect_oxviewconfig extends makaira_connect_oxviewconfig_parent
         }
 
         return $this->activeFilter;
+    }
+
+    public function getEcondaClientKey()
+    {
+        if (null === self::$econdaClientKey) {
+            self::$econdaClientKey = oxRegistry::getConfig()->getShopConfVar(
+                'makaira_connect_econda_aid',
+                null,
+                oxConfig::OXMODULE_MODULE_PREFIX . 'makaira/connect'
+            );
+        }
+
+        return self::$econdaClientKey;
     }
 
     public function resetMakairaFilter($type, $ident)
