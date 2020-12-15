@@ -20,6 +20,8 @@ class makaira_connect_oxviewconfig extends makaira_connect_oxviewconfig_parent
 
     private static $econdaContainerId;
 
+    private $experiments = [];
+
     /**
      * @var string
      */
@@ -398,5 +400,36 @@ class makaira_connect_oxviewconfig extends makaira_connect_oxviewconfig_parent
         }
 
         return self::$filterParamName;
+    }
+
+    /**
+     * @param string $experiment
+     * @param string $variation
+     *
+     * @return bool
+     */
+    public function isInExperiment($experiment, $variation)
+    {
+        return isset($this->experiments[$experiment]) && $this->experiments[$experiment] === $variation;
+    }
+
+    /**
+     * @param array $experiments
+     *
+     * @return makaira_connect_oxviewconfig
+     */
+    public function setExperiments(array $experiments)
+    {
+        $this->experiments = $experiments;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getExperiments()
+    {
+        return $this->experiments;
     }
 }

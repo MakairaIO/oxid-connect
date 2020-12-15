@@ -70,6 +70,13 @@ class makaira_tracking_data_generator
             ];
         }
 
+        $oxidViewConfig = oxRegistry::get('oxviewconfig');
+        if ($oxidViewConfig instanceof makaira_connect_oxviewconfig) {
+            foreach ($oxidViewConfig->getExperiments() as $experiment => $variation) {
+                $trackingData[] = ['AbTesting::enter', ['experiment' => $experiment, 'variation' => $variation]];
+            }
+        }
+
         return array_merge(...$trackingData);
     }
 
