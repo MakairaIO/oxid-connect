@@ -205,7 +205,7 @@ class makaira_connect_request_handler
         oxRegistry::getUtilsServer()->setOxCookie(
             'mak_experiments',
             base64_encode(json_encode($responseExperiments)),
-            15552000
+            time() + 15552000 // 180 days
         );
 
         return $oxArticleList;
