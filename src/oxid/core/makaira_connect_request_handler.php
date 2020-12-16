@@ -142,6 +142,12 @@ class makaira_connect_request_handler
         $searchHandler = $container->get(SearchHandler::class);
         $debugTrace    = oxRegistry::getConfig()->getRequestParameter("mak_debug");
 
+        $cookieExperiments = oxRegistry::getUtilsServer()->getOxCookie('mak_experiments');
+        $requestExperiments = json_decode(base64_decode($cookieExperiments), true);
+        if ($requestExperiments) {
+            $query->constraints[Constraints::AB_EXPERIMENTS] = $requestExperiments;
+        }
+
         $this->result = $searchHandler->search($query, $debugTrace);
 
         if ('odoscope' === $personalizationType) {
@@ -184,6 +190,23 @@ class makaira_connect_request_handler
         $oxArticleList = $this->loadProducts($productIds, $productResult);
 
         $this->aggregations = $this->postProcessAggregations($productResult->aggregations, $query, $unmodifiedQuery);
+
+        $responseExperiments = isset($this->result['experiments']) ? $this->result['experiments'] : [];
+
+        $oxidViewConfig = oxRegistry::get('oxviewconfig');
+        if ($oxidViewConfig instanceof makaira_connect_oxviewconfig) {
+            $experiments = [];
+            foreach ($responseExperiments as $responseExperiment) {
+                $experiments[$responseExperiment['experiment']] = $responseExperiment['variation'];
+            }
+            $oxidViewConfig->setExperiments($experiments);
+        }
+
+        oxRegistry::getUtilsServer()->setOxCookie(
+            'mak_experiments',
+            base64_encode(json_encode($responseExperiments)),
+            time() + 15552000 // 180 days
+        );
 
         return $oxArticleList;
     }
