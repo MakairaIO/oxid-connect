@@ -143,7 +143,7 @@ class makaira_connect_request_handler
         $debugTrace    = oxRegistry::getConfig()->getRequestParameter("mak_debug");
 
         $cookieExperiments = oxRegistry::getUtilsServer()->getOxCookie('mak_experiments');
-        $requestExperiments = json_decode(rawurldecode($cookieExperiments), true);
+        $requestExperiments = json_decode(urldecode($cookieExperiments), true);
         if ($requestExperiments) {
             $query->constraints[Constraints::AB_EXPERIMENTS] = $requestExperiments;
         }
