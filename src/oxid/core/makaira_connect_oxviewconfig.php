@@ -22,6 +22,8 @@ class makaira_connect_oxviewconfig extends makaira_connect_oxviewconfig_parent
 
     private $experiments = [];
 
+    private $cookieBannerActive;
+
     /**
      * @var string
      */
@@ -431,5 +433,21 @@ class makaira_connect_oxviewconfig extends makaira_connect_oxviewconfig_parent
     public function getExperiments()
     {
         return $this->experiments;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCookieBannerActive()
+    {
+        if (null === $this->cookieBannerActive) {
+            $this->cookieBannerActive = (bool) oxRegistry::getConfig()->getShopConfVar(
+                'makaira_cookie_banner_enabled',
+                null,
+                oxConfig::OXMODULE_MODULE_PREFIX . 'makaira/connect'
+            );
+        }
+
+        return $this->cookieBannerActive;
     }
 }
