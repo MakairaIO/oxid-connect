@@ -6,6 +6,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Statement;
 use Makaira\Connect\DatabaseInterface;
 use Makaira\Connect\Utils\TableTranslator;
+use PDO;
 
 /**
  * Simple database facade so we do not need to set fetch mode before each query
@@ -55,6 +56,8 @@ class DoctrineDatabase implements DatabaseInterface
         $statement = $this->preparedStatements[$cacheKey];
         $statement = $this->bindQueryParameters($statement, $parameters);
 
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+
         $statement->execute();
     }
 
@@ -81,6 +84,7 @@ class DoctrineDatabase implements DatabaseInterface
         $statement = $this->bindQueryParameters($statement, $parameters);
 
         $statement->execute();
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
 
         $result = $statement->fetchAll();
         foreach ($result as $nr => $row) {
@@ -111,7 +115,7 @@ class DoctrineDatabase implements DatabaseInterface
 
         $statement->execute();
 
-        return $statement->fetchAll(\PDO::FETCH_COLUMN);
+        return $statement->fetchAll(PDO::FETCH_COLUMN);
     }
 
     protected function bindQueryParameters(Statement $statement, array $parameters)
@@ -119,13 +123,13 @@ class DoctrineDatabase implements DatabaseInterface
         foreach ($parameters as $key => $value) {
             switch (gettype($value)) {
                 case 'integer':
-                    $statement->bindValue($key, $value, \PDO::PARAM_INT);
+                    $statement->bindValue($key, $value, PDO::PARAM_INT);
                     break;
                 case 'boolean':
-                    $statement->bindValue($key, $value, \PDO::PARAM_BOOL);
+                    $statement->bindValue($key, $value, PDO::PARAM_BOOL);
                     break;
                 case 'NULL':
-                    $statement->bindValue($key, $value, \PDO::PARAM_NULL);
+                    $statement->bindValue($key, $value, PDO::PARAM_NULL);
                     break;
                 default:
                     $statement->bindValue($key, $value);
