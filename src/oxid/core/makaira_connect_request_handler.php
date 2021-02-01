@@ -142,7 +142,7 @@ class makaira_connect_request_handler
         $searchHandler = $container->get(SearchHandler::class);
         $debugTrace    = oxRegistry::getConfig()->getRequestParameter("mak_debug");
 
-        $cookieExperiments = oxRegistry::getUtilsServer()->getOxCookie('mak_experiments');
+        $cookieExperiments = oxRegistry::get('oxUtilsServer')->getOxCookie('mak_experiments');
         $requestExperiments = json_decode($cookieExperiments, true);
         if ($requestExperiments) {
             $query->constraints[Constraints::AB_EXPERIMENTS] = $requestExperiments;
@@ -200,7 +200,7 @@ class makaira_connect_request_handler
             $oxidViewConfig->setExperiments($experiments);
         }
 
-        oxRegistry::getUtilsServer()->setOxCookie(
+        oxRegistry::get('oxUtilsServer')->setOxCookie(
             'mak_experiments',
             json_encode($responseExperiments),
             time() + 15552000 // 180 days
