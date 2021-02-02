@@ -21,19 +21,19 @@ class makaira_connect_oxshopcontrol extends makaira_connect_oxshopcontrol_parent
             return;
         }
 
-        $cookieExperiments = oxRegistry::getUtilsServer()->getOxCookie('mak_experiments');
+        $cookieExperiments = oxRegistry::get('oxUtilsServer')->getOxCookie('mak_experiments');
         if (!$cookieExperiments) {
             $group = (bool) random_int(0, 1);
             $experimentsCookie = json_encode(
                 [
                     [
                         'experiment' => (int) $gcp('makaira_ab_testing_local_group_id'),
-                        'variation'  => $group ? $gcp('makaira_ab_testing_local_group_variation') : 'original',
-                    ],
+                        'variation'  => $group ? $gcp('makaira_ab_testing_local_group_variation') : 'original'
+                    ]
                 ]
             );
 
-            oxRegistry::getUtilsServer()->setOxCookie(
+            oxRegistry::get('oxUtilsServer')->setOxCookie(
                 'mak_experiments',
                 $experimentsCookie,
                 time() + 15552000 // 180 days
