@@ -23,7 +23,9 @@ class TableTranslatorConfigurator
      */
     public function __construct(oxLang $oxLang)
     {
-        $languages = $oxLang->getLanguageArray();
+        foreach ($oxLang->getLanguageArray() as $language) {
+            $this->languageMap[$language->abbr] = $language->id;
+        }
     }
 
     public function configure(TableTranslator $tableTranslator)
