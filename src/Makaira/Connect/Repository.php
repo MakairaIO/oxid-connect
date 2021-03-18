@@ -185,7 +185,7 @@ class Repository
                 $change           = $this->getRepositoryForType($type)->get($id);
                 $change->sequence = $sequence;
 
-                if ($typeVariant === $type && $parentId) {
+                if ($typeVariant === $type && $parentId && $change->data) {
                     foreach ($change->data as $_key => $_data) {
                         if (in_array($_key, $this->propsExclude, false)) {
                             continue;
