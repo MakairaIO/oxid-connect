@@ -6,6 +6,7 @@ use Makaira\Import\Changes;
 use Makaira\Connect\Exception as ConnectException;
 use Makaira\Connect\Exceptions\OutOfBoundsException;
 use Makaira\Connect\Repository\AbstractRepository;
+use OxidEsales\Eshop\Core\Registry;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -217,8 +218,9 @@ class Repository
 
                 if ($typeProduct === $type) {
                     if (true === $change->deleted ||
-                        (isset($change->data->OXVARCOUNT) && 0 === $change->data->OXVARCOUNT)) {
-                        $pChange                  = clone $change;
+                        (isset($change->data->OXVARCOUNT) && 0 === $change->data->OXVARCOUNT) ||
+                        Registry::getConfig()->getConfigParam('blVariantParentBuyable') === true) {
+                        $pChange = clone $change;
 
                         if (is_null($pChange->data)) {
                             $pChange->data = new \stdClass();
