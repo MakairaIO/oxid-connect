@@ -6,7 +6,6 @@ use Makaira\Import\Changes;
 use Makaira\Connect\Exception as ConnectException;
 use Makaira\Connect\Exceptions\OutOfBoundsException;
 use Makaira\Connect\Repository\AbstractRepository;
-use oxRegistry;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -116,14 +115,25 @@ class Repository
     private $repositoryMapping = [];
 
     /**
+     * @var bool
+     */
+    private $parentsPurchasable;
+
+    /**
      * Repository constructor.
      *
      * @param \Makaira\Connect\DatabaseInterface $database
      * @param EventDispatcherInterface           $dispatcher
+     * @param bool                               $parentsPurchasable
      */
-    public function __construct(DatabaseInterface $database, EventDispatcherInterface $dispatcher)
-    {
-        $this->database          = $database;
+    public function __construct(
+        DatabaseInterface $database,
+        EventDispatcherInterface $dispatcher,
+        $parentsPurchasable
+    ) {
+        $this->database           = $database;
+        $this->parentsPurchasable = (bool) $parentsPurchasable;
+
         $dispatcher->dispatch('makaira.connect.repository', new Event\RepositoryCollectEvent($this));
     }
 
@@ -219,7 +229,8 @@ class Repository
                 if ($typeProduct === $type) {
                     if (true === $change->deleted ||
                         (isset($change->data->OXVARCOUNT) && 0 === $change->data->OXVARCOUNT) ||
-                        oxRegistry::getConfig()->getConfigParam('blVariantParentBuyable') === true) {
+                         $this->parentsPurchasable
+                    ) {
                         $pChange = clone $change;
 
                         if (is_null($pChange->data)) {
