@@ -155,7 +155,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     public function testTouchExecutesQuery()
     {
         $databaseMock = $this->getMock(DatabaseInterface::class);
-        $repository = new Repository($databaseMock, new \Symfony\Component\EventDispatcher\EventDispatcher());
+        $repository = new Repository($databaseMock, new \Symfony\Component\EventDispatcher\EventDispatcher(), false);
 
         $databaseMock
             ->expects($this->any())
@@ -186,7 +186,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('getAllIds')
             ->will($this->returnValue([1,2,3]));
-        $repository = new Repository($databaseMock, new \Symfony\Component\EventDispatcher\EventDispatcher());
+        $repository = new Repository($databaseMock, new \Symfony\Component\EventDispatcher\EventDispatcher(), false);
         $repository->addRepositoryMapping($repositoryMock1);
         $repository->touchAll();
     }
@@ -222,7 +222,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('getAllIds')
             ->will($this->returnValue([4]));
-        $repository = new Repository($databaseMock, new \Symfony\Component\EventDispatcher\EventDispatcher());
+        $repository = new Repository($databaseMock, new \Symfony\Component\EventDispatcher\EventDispatcher(), false);
         $repository->addRepositoryMapping($repositoryMock1);
         $repository->addRepositoryMapping($repositoryMock2);
         $repository->touchAll();
