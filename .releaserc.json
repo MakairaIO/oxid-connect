@@ -10,7 +10,7 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "sed -i -E \"s/('version'\\s+=>\\s+').*(',)/\\${nextRelease.version}\\2/\" metadata.php"
+        "prepareCmd": "sed -i -E \"s/('version'\\s+=>\\s+').*(',)/\\1${nextRelease.version}\\2/\" metadata.php"
       }
     ],
     [
