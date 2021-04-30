@@ -1,3 +1,10 @@
+## [2.8.8](https://gitlab.marmalade.de/makaira/oxid-connect/compare/2.8.7...2.8.8) (2021-04-30)
+
+
+### Bug Fixes
+
+* **release:** update metadata.php exec cmd ([faaaefb](https://gitlab.marmalade.de/makaira/oxid-connect/commit/faaaefbf15e5606c1556f71e70dc350e076d4382))
+
 ## [2.8.7](https://gitlab.marmalade.de/makaira/oxid-connect/compare/2.8.6...2.8.7) (2021-04-30)
 
 
