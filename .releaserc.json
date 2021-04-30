@@ -8,16 +8,16 @@
     "@semantic-release/gitlab",
     "@semantic-release/npm",
     [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "sed -i -E \"s/('version'\\s+=>\\s+').*(',)/\\${nextRelease.version}\\2/\" metadata.php"
+      }
+    ],
+    [
       "@semantic-release/git",
       {
         "assets": ["package.json", "CHANGELOG.md", "metadata.php"],
         "message": "chore(release): ${nextRelease.version} [skip ci] \n\n${nextRelease.notes}"
-      }
-    ],
-    [
-      "@semantic-release/exec",
-      {
-        "prepareCmd": "sed -i -E \"s/('version'\\s+=>\\s+').*(',)/\\${nextRelease.version}\\2/\" metadata.php"
       }
     ]
   ]
