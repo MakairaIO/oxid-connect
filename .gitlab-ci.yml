@@ -1,6 +1,7 @@
 stages:
   - test
   - build
+  - release
 
 execute_tests:
   stage: test
@@ -17,3 +18,18 @@ execute_build:
   script:
     - echo "checking Versions-Tag '${CI_COMMIT_REF_NAME}'"
     - VERSIONSTEST=`cat metadata.php | grep "${CI_COMMIT_REF_NAME}"`
+
+release:
+  tags:
+    - marmalade-docker
+  stage: release
+  image: node:14
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - /usr/local/share/.cache/yarn/v6
+  script:
+    - yarn
+    - yarn release
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
