@@ -32,21 +32,9 @@ jobs:
           composer_version: 1
           command: install
 
-      - name: Cache Composer dependencies
-        uses: actions/cache@v2
-        with:
-          path: /tmp/composer-cache
-          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
-
-      - name: Install php dependencies
-        uses: php-actions/composer@v5
-        with:
-          php_version: 7.4
-          version: 1
-
       - uses: php-actions/phpunit@v2
 
-      - name: phpcs
+      - name: Run phpcs
         run: php vendor/bin/phpcs --standard=PSR2 src/Makaira/
 
       - name: Run phpmd
