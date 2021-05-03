@@ -1,0 +1,34 @@
+name: Run php tests
+on:
+  push:
+    branches:
+
+jobs:
+  test:
+    if: |
+      !(github.event_name == 'push' && contains(github.event.head_commit.message, '[skip ci]')) &&
+      !(github.event_name == 'pull_request' && contains(join(github.event.pull_request.title, github.event.pull_request.body), '[skip ci]'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone code repo
+        uses: actions/checkout@v2
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: /tmp/composer-cache
+          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+
+      - name: Install php dependencies
+        uses: php-actions/composer@v5
+        with:
+          php_version: 7.4
+          version: 1
+
+      - uses: php-actions/phpunit@v2
+
+      - name: phpcs
+        run: php vendor/bin/phpcs --standard=PSR2 src/Makaira/
+
+      - name: Run phpmd
+        run: php vendor/bin/phpmd src/Makaira/ text codesize,design
