@@ -115,14 +115,25 @@ class Repository
     private $repositoryMapping = [];
 
     /**
+     * @var bool
+     */
+    private $parentsPurchasable;
+
+    /**
      * Repository constructor.
      *
      * @param \Makaira\Connect\DatabaseInterface $database
      * @param EventDispatcherInterface           $dispatcher
+     * @param bool                               $parentsPurchasable
      */
-    public function __construct(DatabaseInterface $database, EventDispatcherInterface $dispatcher)
-    {
-        $this->database          = $database;
+    public function __construct(
+        DatabaseInterface $database,
+        EventDispatcherInterface $dispatcher,
+        $parentsPurchasable
+    ) {
+        $this->database           = $database;
+        $this->parentsPurchasable = (bool) $parentsPurchasable;
+
         $dispatcher->dispatch('makaira.connect.repository', new Event\RepositoryCollectEvent($this));
     }
 
@@ -217,8 +228,10 @@ class Repository
 
                 if ($typeProduct === $type) {
                     if (true === $change->deleted ||
-                        (isset($change->data->OXVARCOUNT) && 0 === $change->data->OXVARCOUNT)) {
-                        $pChange                  = clone $change;
+                        (isset($change->data->OXVARCOUNT) && 0 === $change->data->OXVARCOUNT) ||
+                         $this->parentsPurchasable
+                    ) {
+                        $pChange = clone $change;
 
                         if (is_null($pChange->data)) {
                             $pChange->data = new \stdClass();
