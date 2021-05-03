@@ -35,3 +35,8 @@ jobs:
           GIT_AUTHOR_EMAIL: ${{ secrets.GIT_EMAIL }}
           GIT_COMMITTER_NAME: ${{ secrets.GIT_USERNAME }}
           GIT_COMMITTER_EMAIL: ${{ secrets.GIT_EMAIL }}
+
+      - name: Push Changes to GitLab
+        run: git push $GITLAB_REPO
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITLAB_REPO }}
