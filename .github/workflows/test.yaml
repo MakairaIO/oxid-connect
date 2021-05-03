@@ -13,26 +13,17 @@ jobs:
       - name: Clone code repo
         uses: actions/checkout@v2
 
-      - name: Get composer cache directory
-        id: composer_config
-        uses: baschny/php-composer-action@v1
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          composer_version: 1
-          command: get_config
+          php-version: '7.1'
+          tools: composer:v1
 
-      - name: Cache composer downloads
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.composer_config.outputs.composer_cache_dir }}
-          key: composer-v${{ steps.composer_config.outputs.composer_major_version }}
+      - name: Install dependencies
+        run: composer install
 
-      - name: Run composer install
-        uses: baschny/php-composer-action@v1
-        with:
-          composer_version: 1
-          command: install
-
-      - uses: php-actions/phpunit@v2
+      - name: Run phpunit
+        run: php vendor/bin/phpunit --coverage-text
 
       - name: Run phpcs
         run: php vendor/bin/phpcs --standard=PSR2 src/Makaira/
