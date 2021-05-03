@@ -1,3 +1,10 @@
+## [2.8.9](https://github.com/MakairaIO/oxid-connect/compare/2.8.8...2.8.9) (2021-05-03)
+
+
+### Bug Fixes
+
+* **Connect/Repository.php:** check if data of change is not NULL ([71c18e8](https://github.com/MakairaIO/oxid-connect/commit/71c18e88b58f1f07b46c03a2ca2bcaa9d62762a6)), closes [#6](https://github.com/MakairaIO/oxid-connect/issues/6)
+
 ## [2.8.8](https://gitlab.marmalade.de/makaira/oxid-connect/compare/2.8.7...2.8.8) (2021-04-30)
 
 
