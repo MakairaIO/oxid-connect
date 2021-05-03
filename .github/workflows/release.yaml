@@ -39,4 +39,4 @@ jobs:
       - name: Push Changes to GitLab
         run: git push $GITLAB_REPO
         env:
-          GITHUB_TOKEN: ${{ secrets.GITLAB_REPO }}
+          GITLAB_REPO: ${{ secrets.GITLAB_REPO }}
