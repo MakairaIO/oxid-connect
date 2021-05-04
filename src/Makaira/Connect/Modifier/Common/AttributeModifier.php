@@ -2,7 +2,6 @@
 
 namespace Makaira\Connect\Modifier\Common;
 
-use Kore\DataObject\DataObject;
 use Makaira\Connect\DatabaseInterface;
 use Makaira\Connect\Modifier;
 use Makaira\Connect\Type;
