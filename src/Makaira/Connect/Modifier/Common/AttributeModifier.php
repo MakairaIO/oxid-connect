@@ -2,6 +2,7 @@
 
 namespace Makaira\Connect\Modifier\Common;
 
+use Kore\DataObject\DataObject;
 use Makaira\Connect\DatabaseInterface;
 use Makaira\Connect\Modifier;
 use Makaira\Connect\Type;
@@ -36,9 +37,8 @@ class AttributeModifier extends Modifier
                             variant.oxvarselect as `value`
                         FROM
                             oxarticles parent
-                            JOIN oxarticles variant ON parent.oxid = variant.oxparentid
-                        WHERE
-                            variant.oxparentid = :productId
+                            JOIN (select * from oxarticles WHERE
+                            oxparentid = :productId AND {{activeSnippet}}) variant ON parent.oxid = variant.oxparentid
                         ';
 
     public $selectVariantsNameQuery = '
@@ -204,8 +204,11 @@ class AttributeModifier extends Modifier
                 ],
                 false
             );
+            $variantsQuery                   =
+                str_replace('{{activeSnippet}}', $this->activeSnippet, $this->selectVariantsQuery);
+            var_dump($variantsQuery);
             $variants = $this->database->query(
-                $this->selectVariantsQuery,
+                $variantsQuery,
                 [
                     'productId' => $product->id,
                 ]
