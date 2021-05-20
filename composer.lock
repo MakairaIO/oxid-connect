@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bbb68410d6f5fdbf9c6028bb3394f6b1",
+    "content-hash": "941d6a57c0070983254663156f050b59",
     "packages": [
         {
             "name": "composer/installers",
@@ -172,16 +172,16 @@
         },
         {
             "name": "makaira/shared-libs",
-            "version": "2021.4.0",
+            "version": "2021.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MakairaIO/shared-libs.git",
-                "reference": "93dee331be5d6a2e564d0e5983f03edc6623bc9a"
+                "reference": "d804c1cdd7c4efbeb13ca6ef41b907dd2cea1bf5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MakairaIO/shared-libs/zipball/93dee331be5d6a2e564d0e5983f03edc6623bc9a",
-                "reference": "93dee331be5d6a2e564d0e5983f03edc6623bc9a",
+                "url": "https://api.github.com/repos/MakairaIO/shared-libs/zipball/d804c1cdd7c4efbeb13ca6ef41b907dd2cea1bf5",
+                "reference": "d804c1cdd7c4efbeb13ca6ef41b907dd2cea1bf5",
                 "shasum": ""
             },
             "require": {
@@ -200,7 +200,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "time": "2021-04-12T13:10:21+00:00"
+            "time": "2021-05-19T16:04:55+00:00"
         }
     ],
     "packages-dev": [
