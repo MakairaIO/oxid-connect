@@ -1,3 +1,10 @@
+## [2.8.11](https://github.com/MakairaIO/oxid-connect/compare/2.8.10...2.8.11) (2021-05-25)
+
+
+### Bug Fixes
+
+* **dependencies:** Fix vulnerabilities in npm modules lodash and hosted-git-info ([ff589c5](https://github.com/MakairaIO/oxid-connect/commit/ff589c5a7c1a554242a216bb4bfec21136be935f)), closes [#12](https://github.com/MakairaIO/oxid-connect/issues/12)
+
 ## [2.8.10](https://github.com/MakairaIO/oxid-connect/compare/2.8.9...2.8.10) (2021-05-20)
 
 
