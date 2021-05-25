@@ -1,3 +1,10 @@
+## [2.8.10](https://github.com/MakairaIO/oxid-connect/compare/2.8.9...2.8.10) (2021-05-20)
+
+
+### Bug Fixes
+
+* **Recommendations:** Enabled A/B-Testing now doesn't break Recommendations anymore ([d13cffd](https://github.com/MakairaIO/oxid-connect/commit/d13cffdaef3879a97a4f27193b3c5f56758351f2))
+
 ## [2.8.9](https://github.com/MakairaIO/oxid-connect/compare/2.8.8...2.8.9) (2021-05-03)
 
 
