@@ -1,3 +1,10 @@
+# [2.9.0](https://github.com/MakairaIO/oxid-connect/compare/2.8.11...2.9.0) (2021-06-02)
+
+
+### Features
+
+* **touch-all:** Now supports shop-id as parameter ([fc74645](https://github.com/MakairaIO/oxid-connect/commit/fc746458e1e90110342727267c31e61b41224bda))
+
 ## [2.8.11](https://github.com/MakairaIO/oxid-connect/compare/2.8.10...2.8.11) (2021-05-25)
 
 
