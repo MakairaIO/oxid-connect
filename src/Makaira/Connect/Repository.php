@@ -115,14 +115,25 @@ class Repository
     private $repositoryMapping = [];
 
     /**
+     * @var bool
+     */
+    private $parentsPurchasable;
+
+    /**
      * Repository constructor.
      *
      * @param \Makaira\Connect\DatabaseInterface $database
      * @param EventDispatcherInterface           $dispatcher
+     * @param bool                               $parentsPurchasable
      */
-    public function __construct(DatabaseInterface $database, EventDispatcherInterface $dispatcher)
-    {
-        $this->database          = $database;
+    public function __construct(
+        DatabaseInterface $database,
+        EventDispatcherInterface $dispatcher,
+        $parentsPurchasable
+    ) {
+        $this->database           = $database;
+        $this->parentsPurchasable = (bool) $parentsPurchasable;
+
         $dispatcher->dispatch('makaira.connect.repository', new Event\RepositoryCollectEvent($this));
     }
 
@@ -185,7 +196,7 @@ class Repository
                 $change           = $this->getRepositoryForType($type)->get($id);
                 $change->sequence = $sequence;
 
-                if ($typeVariant === $type && $parentId) {
+                if ($typeVariant === $type && $parentId && $change->data) {
                     foreach ($change->data as $_key => $_data) {
                         if (in_array($_key, $this->propsExclude, false)) {
                             continue;
@@ -217,8 +228,10 @@ class Repository
 
                 if ($typeProduct === $type) {
                     if (true === $change->deleted ||
-                        (isset($change->data->OXVARCOUNT) && 0 === $change->data->OXVARCOUNT)) {
-                        $pChange                  = clone $change;
+                        (isset($change->data->OXVARCOUNT) && 0 === $change->data->OXVARCOUNT) ||
+                         $this->parentsPurchasable
+                    ) {
+                        $pChange = clone $change;
 
                         if (is_null($pChange->data)) {
                             $pChange->data = new \stdClass();
@@ -332,16 +345,16 @@ class Repository
     /**
      * Add all items to the changes list.
      */
-    public function touchAll()
+    public function touchAll($shopId)
     {
         $this->cleanUp();
 
         /**
          * @var string              $type
-         * @var RepositoryInterface $repository
+         * @var AbstractRepository $repository
          */
         foreach ($this->repositoryMapping as $type => $repository) {
-            foreach ($repository->getAllIds() as $id) {
+            foreach ($repository->getAllIds($shopId) as $id) {
                 $this->touch($type, $id);
             }
         }

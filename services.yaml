@@ -12,12 +12,18 @@ services:
       $database: '@Doctrine\DBAL\Connection'
       $translator: '@Makaira\Connect\Utils\TableTranslator'
 
+  Makaira\Connect\Utils\TableTranslatorConfigurator:
+    class: Makaira\Connect\Utils\TableTranslatorConfigurator
+    arguments:
+      $oxLang: '@makaira.connect.oxid.language'
+
   # oxid.table_translator
   Makaira\Connect\Utils\TableTranslator:
     class: Makaira\Connect\Utils\TableTranslator
     public: true
     arguments:
       - ['oxarticles', 'oxartextends', 'oxattribute', 'oxcategories', 'oxmanufacturers', 'oxobject2attribute']
+    configurator: ['@Makaira\Connect\Utils\TableTranslatorConfigurator', 'configure']
 
   # content_parsers.oxid.smarty
   # makaira.content_parser
@@ -168,6 +174,7 @@ services:
     arguments:
       $database: '@Makaira\Connect\Database\DoctrineDatabase'
       $dispatcher: '@Symfony\Component\EventDispatcher\EventDispatcherInterface'
+      $parentsPurchasable: "@=service('makaira.connect.oxid.config').getShopConfVar('blVariantParentBuyable')"
 
   # makaira.connect.repository.user
   Makaira\Connect\Repository\UserRepository:
@@ -395,6 +402,7 @@ services:
     arguments:
       $database: '@Makaira\Connect\Database\DoctrineDatabase'
       $modifiers: '@makaira.connect.repository.product.mofifier_list'
+      $tableTranslator: '@Makaira\Connect\Utils\TableTranslator'
     tags:
     - { name: 'kernel.event_listener', event: 'makaira.connect.repository', priority: 1000, method: 'addRepository' }
 
@@ -412,6 +420,7 @@ services:
     arguments:
       $database: '@Makaira\Connect\Database\DoctrineDatabase'
       $modifiers: '@makaira.connect.repository.variant.mofifier_list'
+      $tableTranslator: '@Makaira\Connect\Utils\TableTranslator'
     tags:
     - { name: 'kernel.event_listener', event: 'makaira.connect.repository', priority: 990, method: 'addRepository' }
 
@@ -429,6 +438,7 @@ services:
     arguments:
       $database: '@Makaira\Connect\Database\DoctrineDatabase'
       $modifiers: '@makaira.connect.repository.category.mofifier_list'
+      $tableTranslator: '@Makaira\Connect\Utils\TableTranslator'
     tags:
     - { name: 'kernel.event_listener', event: 'makaira.connect.repository', priority: 980, method: 'addRepository' }
 
@@ -446,6 +456,7 @@ services:
     arguments:
       $database: '@Makaira\Connect\Database\DoctrineDatabase'
       $modifiers: '@makaira.connect.repository.manufacturer.mofifier_list'
+      $tableTranslator: '@Makaira\Connect\Utils\TableTranslator'
     tags:
     - { name: 'kernel.event_listener', event: 'makaira.connect.repository', priority: 970, method: 'addRepository' }
 
