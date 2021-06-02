@@ -5,6 +5,7 @@ namespace Makaira\Connect\Repository;
 use Makaira\Connect\Change;
 use Makaira\Connect\DatabaseInterface;
 use Makaira\Connect\Event\RepositoryCollectEvent;
+use Makaira\Connect\Utils\TableTranslator;
 
 abstract class AbstractRepository
 {
@@ -18,10 +19,16 @@ abstract class AbstractRepository
      */
     protected $modifiers;
 
-    public function __construct(DatabaseInterface $database, ModifierList $modifiers)
+    /**
+     * @var TableTranslator
+     */
+    protected $tableTranslator;
+
+    public function __construct(DatabaseInterface $database, ModifierList $modifiers, TableTranslator $tableTranslator)
     {
-        $this->database  = $database;
-        $this->modifiers = $modifiers;
+        $this->database        = $database;
+        $this->modifiers       = $modifiers;
+        $this->tableTranslator = $tableTranslator;
     }
 
     public function addRepository($e)
@@ -57,12 +64,15 @@ abstract class AbstractRepository
      *
      * @return string[]
      */
-    public function getAllIds()
+    public function getAllIds($shopId = null)
     {
-        $result = $this->database->query($this->getAllIdsQuery());
+        $sql = $this->getAllIdsQuery();
+        $this->tableTranslator->setShopId($shopId);
+        $sql = $this->tableTranslator->translate($sql);
+        $result      = $this->database->query($sql);
 
         return array_map(
-            function ($row) {
+            static function ($row) {
                 return $row['OXID'];
             },
             $result
