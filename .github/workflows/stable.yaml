@@ -1,14 +1,40 @@
-name: Release a new version
+name: Stable Branch Workflow
 on:
   push:
     branches:
       - stable
 
 jobs:
-  release:
+  test:
+    name: Run PHP tests
     if: |
       !(github.event_name == 'push' && contains(github.event.head_commit.message, '[skip ci]')) &&
       !(github.event_name == 'pull_request' && contains(join(github.event.pull_request.title, github.event.pull_request.body), '[skip ci]'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone code repo
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.1'
+          tools: composer:v1
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Run phpunit
+        run: php vendor/bin/phpunit --coverage-text
+
+      - name: Run phpcs
+        run: php vendor/bin/phpcs --standard=PSR2 src/Makaira/
+
+      - name: Run phpmd
+        run: php vendor/bin/phpmd src/Makaira/ text codesize,design
+  release:
+    name: Create a new release
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Clone code repo
@@ -39,7 +65,11 @@ jobs:
           GIT_COMMITTER_NAME: ${{ secrets.GIT_USERNAME }}
           GIT_COMMITTER_EMAIL: ${{ secrets.GIT_EMAIL }}
           GIT_CREDENTIALS: ${{ secrets.GIT_CREDENTIALS }}
-
+  push-to-gitlab:
+    name: Push current version to GitLab
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
       - name: Push Changes to GitLab
         run: git push $GITLAB_REPO
         env:
