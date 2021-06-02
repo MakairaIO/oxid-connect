@@ -1,3 +1,24 @@
+# [2.9.0](https://github.com/MakairaIO/oxid-connect/compare/2.8.11...2.9.0) (2021-06-02)
+
+
+### Features
+
+* **touch-all:** Now supports shop-id as parameter ([fc74645](https://github.com/MakairaIO/oxid-connect/commit/fc746458e1e90110342727267c31e61b41224bda))
+
+## [2.8.11](https://github.com/MakairaIO/oxid-connect/compare/2.8.10...2.8.11) (2021-05-25)
+
+
+### Bug Fixes
+
+* **dependencies:** Fix vulnerabilities in npm modules lodash and hosted-git-info ([ff589c5](https://github.com/MakairaIO/oxid-connect/commit/ff589c5a7c1a554242a216bb4bfec21136be935f)), closes [#12](https://github.com/MakairaIO/oxid-connect/issues/12)
+
+## [2.8.10](https://github.com/MakairaIO/oxid-connect/compare/2.8.9...2.8.10) (2021-05-20)
+
+
+### Bug Fixes
+
+* **Recommendations:** Enabled A/B-Testing now doesn't break Recommendations anymore ([d13cffd](https://github.com/MakairaIO/oxid-connect/commit/d13cffdaef3879a97a4f27193b3c5f56758351f2))
+
 ## [2.8.9](https://github.com/MakairaIO/oxid-connect/compare/2.8.8...2.8.9) (2021-05-03)
 
 

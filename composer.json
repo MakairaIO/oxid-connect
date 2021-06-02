@@ -18,8 +18,9 @@
     }
   },
   "require": {
+    "php": ">=5.6.0",
     "composer/installers": "^1.9.0",
-    "makaira/shared-libs": "^2021.4"
+    "makaira/shared-libs": "^2021.5.2"
   },
   "extra": {
     "oxideshop": {
@@ -36,7 +37,7 @@
   },
   "config": {
     "platform": {
-        "php": "7.1.7"
+        "php": "5.6.40"
     }
   }
 }
