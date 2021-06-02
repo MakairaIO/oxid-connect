@@ -402,7 +402,6 @@ services:
     arguments:
       $database: '@Makaira\Connect\Database\DoctrineDatabase'
       $modifiers: '@makaira.connect.repository.product.mofifier_list'
-      $tableTranslator: '@Makaira\Connect\Utils\TableTranslator'
     tags:
     - { name: 'kernel.event_listener', event: 'makaira.connect.repository', priority: 1000, method: 'addRepository' }
 
@@ -420,7 +419,6 @@ services:
     arguments:
       $database: '@Makaira\Connect\Database\DoctrineDatabase'
       $modifiers: '@makaira.connect.repository.variant.mofifier_list'
-      $tableTranslator: '@Makaira\Connect\Utils\TableTranslator'
     tags:
     - { name: 'kernel.event_listener', event: 'makaira.connect.repository', priority: 990, method: 'addRepository' }
 
@@ -438,7 +436,6 @@ services:
     arguments:
       $database: '@Makaira\Connect\Database\DoctrineDatabase'
       $modifiers: '@makaira.connect.repository.category.mofifier_list'
-      $tableTranslator: '@Makaira\Connect\Utils\TableTranslator'
     tags:
     - { name: 'kernel.event_listener', event: 'makaira.connect.repository', priority: 980, method: 'addRepository' }
 
@@ -456,7 +453,6 @@ services:
     arguments:
       $database: '@Makaira\Connect\Database\DoctrineDatabase'
       $modifiers: '@makaira.connect.repository.manufacturer.mofifier_list'
-      $tableTranslator: '@Makaira\Connect\Utils\TableTranslator'
     tags:
     - { name: 'kernel.event_listener', event: 'makaira.connect.repository', priority: 970, method: 'addRepository' }
 

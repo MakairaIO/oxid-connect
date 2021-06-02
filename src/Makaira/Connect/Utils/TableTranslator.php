@@ -6,20 +6,9 @@ use Closure;
 
 class TableTranslator
 {
-    /**
-     * @var string[]
-     */
     private $searchTables;
 
-    /**
-     * @var string
-     */
     private $language = 'de';
-
-    /**
-     * @var
-     */
-    private $shopId;
 
     /**
      * @var Closure
@@ -35,11 +24,7 @@ class TableTranslator
     {
         $this->searchTables = $searchTables;
 
-        $this->viewNameGenerator = static function ($table, $language, $shopId = null) {
-            if (null !== $shopId) {
-                $table = "{$table}_{$shopId}";
-            }
-
+        $this->viewNameGenerator = static function ($table, $language) {
             return "oxv_{$table}_{$language}";
         };
     }
@@ -60,26 +45,10 @@ class TableTranslator
      * Set the language
      *
      * @param string $language
-     *
-     * @return TableTranslator
      */
     public function setLanguage($language)
     {
         $this->language = $language;
-
-        return $this;
-    }
-
-    /**
-     * @param mixed $shopId
-     *
-     * @return TableTranslator
-     */
-    public function setShopId($shopId)
-    {
-        $this->shopId = $shopId;
-
-        return $this;
     }
 
     /**
@@ -92,10 +61,10 @@ class TableTranslator
     public function translate($sql)
     {
         foreach ($this->searchTables as $searchTable) {
-            $replaceTable = ($this->viewNameGenerator)($searchTable, $this->language, $this->shopId);
+            $replaceTable = ($this->viewNameGenerator)($searchTable, $this->language);
             $sql          = preg_replace_callback(
                 "((?P<tableName>{$searchTable})(?P<end>[^A-Za-z0-9_]|$))",
-                static function ($match) use ($replaceTable) {
+                function ($match) use ($replaceTable) {
                     return $replaceTable . $match['end'];
                 },
                 $sql

@@ -345,16 +345,16 @@ class Repository
     /**
      * Add all items to the changes list.
      */
-    public function touchAll($shopId)
+    public function touchAll()
     {
         $this->cleanUp();
 
         /**
          * @var string              $type
-         * @var AbstractRepository $repository
+         * @var RepositoryInterface $repository
          */
         foreach ($this->repositoryMapping as $type => $repository) {
-            foreach ($repository->getAllIds($shopId) as $id) {
+            foreach ($repository->getAllIds() as $id) {
                 $this->touch($type, $id);
             }
         }
