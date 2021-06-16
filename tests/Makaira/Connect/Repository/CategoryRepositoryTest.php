@@ -2,29 +2,26 @@
 
 namespace Makaira\Connect\Repository;
 
-
 use Makaira\Connect\Change;
 use Makaira\Connect\DatabaseInterface;
-use Makaira\Connect\Result\Changes;
 use Makaira\Connect\Type\Category\Category;
-use Makaira\Connect\Modifier;
-use Makaira\Connect\Repository\ModifierList;
+use Makaira\Connect\UnitTestCase;
 
-class CategoryRepositoryTest extends \PHPUnit_Framework_TestCase
+class CategoryRepositoryTest extends UnitTestCase
 {
     public function testLoadCategory()
     {
         $databaseMock = $this->getMock(DatabaseInterface::class);
         $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
-        $repository = new CategoryRepository($databaseMock, $modifiersMock);
+
+        $repository = new CategoryRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
 
         $databaseMock
             ->expects($this->once())
             ->method('query')
-            ->will($this->returnValue([['id' => 42]]));
+            ->willReturn([['id' => 42]]);
 
         $modifiersMock
-            ->expects($this->any())
             ->method('applyModifiers')
             ->will($this->returnArgument(0));
 
@@ -49,12 +46,13 @@ class CategoryRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $databaseMock = $this->getMock(DatabaseInterface::class);
         $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
-        $repository = new CategoryRepository($databaseMock, $modifiersMock);
+
+        $repository = new CategoryRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
 
         $databaseMock
             ->expects($this->once())
             ->method('query')
-            ->will($this->returnValue([]));
+            ->willReturn([]);
 
         $modifiersMock
             ->expects($this->never())
@@ -77,17 +75,18 @@ class CategoryRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $databaseMock = $this->getMock(DatabaseInterface::class);
         $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
-        $repository = new CategoryRepository($databaseMock, $modifiersMock);
+
+        $repository = new CategoryRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
 
         $databaseMock
             ->expects($this->once())
             ->method('query')
-            ->will($this->returnValue([['id' => 42]]));
+            ->willReturn([['id' => 42]]);
 
         $modifiersMock
             ->expects($this->once())
             ->method('applyModifiers')
-            ->will($this->returnValue('modified'));
+            ->willReturn('modified');
 
         $change = $repository->get(42);
         $this->assertEquals(
@@ -106,12 +105,13 @@ class CategoryRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $databaseMock = $this->getMock(DatabaseInterface::class);
         $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
-        $repository = new CategoryRepository($databaseMock, $modifiersMock);
+
+        $repository = new CategoryRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
 
         $databaseMock
             ->expects($this->once())
             ->method('query')
-            ->will($this->returnValue([['OXID' => 42]]));
+            ->willReturn([['OXID' => 42]]);
 
         $this->assertEquals([42], $repository->getAllIds());
     }
