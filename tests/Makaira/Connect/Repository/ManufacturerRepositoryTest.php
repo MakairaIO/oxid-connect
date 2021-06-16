@@ -4,26 +4,24 @@ namespace Makaira\Connect\Repository;
 
 use Makaira\Connect\Change;
 use Makaira\Connect\DatabaseInterface;
-use Makaira\Connect\Result\Changes;
 use Makaira\Connect\Type\Manufacturer\Manufacturer;
-use Makaira\Connect\Modifier;
-use Makaira\Connect\Repository\ModifierList;
+use Makaira\Connect\UnitTestCase;
 
-class ManufacturerRepositoryTest extends \PHPUnit_Framework_TestCase
+class ManufacturerRepositoryTest extends UnitTestCase
 {
     public function testLoadManufacturer()
     {
         $databaseMock = $this->getMock(DatabaseInterface::class);
         $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
-        $repository = new ManufacturerRepository($databaseMock, $modifiersMock);
+
+        $repository = new ManufacturerRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
 
         $databaseMock
             ->expects($this->once())
             ->method('query')
-            ->will($this->returnValue([['id' => 42]]));
+            ->willReturn([['id' => 42]]);
 
         $modifiersMock
-            ->expects($this->any())
             ->method('applyModifiers')
             ->will($this->returnArgument(0));
 
@@ -48,12 +46,13 @@ class ManufacturerRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $databaseMock = $this->getMock(DatabaseInterface::class);
         $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
-        $repository = new ManufacturerRepository($databaseMock, $modifiersMock);
+
+        $repository = new ManufacturerRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
 
         $databaseMock
             ->expects($this->once())
             ->method('query')
-            ->will($this->returnValue([]));
+            ->willReturn([]);
 
         $modifiersMock
             ->expects($this->never())
@@ -76,17 +75,18 @@ class ManufacturerRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $databaseMock = $this->getMock(DatabaseInterface::class);
         $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
-        $repository = new ManufacturerRepository($databaseMock, $modifiersMock);
+
+        $repository = new ManufacturerRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
 
         $databaseMock
             ->expects($this->once())
             ->method('query')
-            ->will($this->returnValue([['id' => 42]]));
+            ->willReturn([['id' => 42]]);
 
         $modifiersMock
             ->expects($this->once())
             ->method('applyModifiers')
-            ->will($this->returnValue('modified'));
+            ->willReturn('modified');
 
         $change = $repository->get(42);
         $this->assertEquals(
@@ -105,12 +105,13 @@ class ManufacturerRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $databaseMock = $this->getMock(DatabaseInterface::class);
         $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
-        $repository = new ManufacturerRepository($databaseMock, $modifiersMock);
+
+        $repository = new ManufacturerRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
 
         $databaseMock
             ->expects($this->once())
             ->method('query')
-            ->will($this->returnValue([['OXID' => 42]]));
+            ->willReturn([['OXID' => 42]]);
 
         $this->assertEquals([42], $repository->getAllIds());
     }
