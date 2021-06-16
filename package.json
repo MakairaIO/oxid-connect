@@ -1,6 +1,6 @@
 {
   "name": "oxid-connect",
-  "version": "2.9.0",
+  "version": "2.9.1",
   "private": true,
   "scripts": {
     "release": "semantic-release"

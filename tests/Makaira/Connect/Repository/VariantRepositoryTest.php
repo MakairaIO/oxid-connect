@@ -6,27 +6,25 @@ namespace Makaira\Connect\Repository;
 use Makaira\Connect\Change;
 use Makaira\Connect\DatabaseInterface;
 use Makaira\Connect\Type\Variant\Variant;
+use Makaira\Connect\UnitTestCase;
 
-class VariantRepositoryTest extends \PHPUnit_Framework_TestCase
+class VariantRepositoryTest extends UnitTestCase
 {
     public function testLoadVariant()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
-        $repository = new VariantRepository($databaseMock, $modifiersMock);
+        list($databaseMock, $modifiersMock, $repository) = $this->createVariantRepository();
 
         $databaseMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('query')
-            ->will($this->returnValue([['id' => 42]]));
+            ->willReturn([['id' => 42]]);
 
         $modifiersMock
-            ->expects($this->any())
             ->method('applyModifiers')
-            ->will($this->returnArgument(0));
+            ->will(self::returnArgument(0));
 
         $change = $repository->get(42);
-        $this->assertEquals(
+        self::assertEquals(
             new Change(
                 array(
                     'id' => 42,
@@ -44,21 +42,19 @@ class VariantRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testSetDeletedMarker()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
-        $repository = new VariantRepository($databaseMock, $modifiersMock);
+        list($databaseMock, $modifiersMock, $repository) = $this->createVariantRepository();
 
         $databaseMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('query')
-            ->will($this->returnValue([]));
+            ->willReturn([]);
 
         $modifiersMock
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('applyModifiers');
 
         $change = $repository->get(42);
-        $this->assertEquals(
+        self::assertEquals(
             new Change(
                 array(
                     'id' => 42,
@@ -72,22 +68,20 @@ class VariantRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testRunModifierLoadVariant()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
-        $repository = new VariantRepository($databaseMock, $modifiersMock);
+        list($databaseMock, $modifiersMock, $repository) = $this->createVariantRepository();
 
         $databaseMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('query')
-            ->will($this->returnValue([['id' => 42]]));
+            ->willReturn([['id' => 42]]);
 
         $modifiersMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('applyModifiers')
-            ->will($this->returnValue('modified'));
+            ->willReturn('modified');
 
         $change = $repository->get(42);
-        $this->assertEquals(
+        self::assertEquals(
             new Change(
                 array(
                     'id' => 42,
@@ -101,15 +95,25 @@ class VariantRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testGetAllIds()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
-        $repository = new VariantRepository($databaseMock, $modifiersMock);
+        list($databaseMock, , $repository) = $this->createVariantRepository();
 
         $databaseMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('query')
-            ->will($this->returnValue([['OXID' => 42]]));
+            ->willReturn([['OXID' => 42]]);
 
-        $this->assertEquals([42], $repository->getAllIds());
+        self::assertEquals([42], $repository->getAllIds());
+    }
+
+    /**
+     * @return array
+     */
+    private function createVariantRepository()
+    {
+        $databaseMock        = $this->getMock(DatabaseInterface::class);
+        $modifiersMock       = $this->getMock(ModifierList::class, [], [], '', false);
+        $repository          = new VariantRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
+
+        return [$databaseMock, $modifiersMock, $repository];
     }
 }

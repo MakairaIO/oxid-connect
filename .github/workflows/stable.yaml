@@ -65,12 +65,3 @@ jobs:
           GIT_COMMITTER_NAME: ${{ secrets.GIT_USERNAME }}
           GIT_COMMITTER_EMAIL: ${{ secrets.GIT_EMAIL }}
           GIT_CREDENTIALS: ${{ secrets.GIT_CREDENTIALS }}
-  push-to-gitlab:
-    name: Push current version to GitLab
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Push Changes to GitLab
-        run: git push $GITLAB_REPO
-        env:
-          GITLAB_REPO: ${{ secrets.GITLAB_REPO }}
