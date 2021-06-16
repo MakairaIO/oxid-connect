@@ -345,7 +345,7 @@ class Repository
     /**
      * Add all items to the changes list.
      */
-    public function touchAll($shopId)
+    public function touchAll($shopId = null)
     {
         $this->cleanUp();
 

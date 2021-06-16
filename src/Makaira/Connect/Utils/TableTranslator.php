@@ -49,7 +49,7 @@ class TableTranslator
      *
      * @return TableTranslator
      */
-    public function setViewNameGenerator(Closure $viewNameGenerator): TableTranslator
+    public function setViewNameGenerator(Closure $viewNameGenerator)
     {
         $this->viewNameGenerator = $viewNameGenerator;
 
@@ -92,7 +92,8 @@ class TableTranslator
     public function translate($sql)
     {
         foreach ($this->searchTables as $searchTable) {
-            $replaceTable = ($this->viewNameGenerator)($searchTable, $this->language, $this->shopId);
+            $viewNameGenerator = $this->viewNameGenerator;
+            $replaceTable = $viewNameGenerator($searchTable, $this->language, $this->shopId);
             $sql          = preg_replace_callback(
                 "((?P<tableName>{$searchTable})(?P<end>[^A-Za-z0-9_]|$))",
                 static function ($match) use ($replaceTable) {

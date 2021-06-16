@@ -1,3 +1,11 @@
+## [2.9.1](https://github.com/MakairaIO/oxid-connect/compare/2.9.0...2.9.1) (2021-06-16)
+
+
+### Bug Fixes
+
+* **touch-all:** fix PHP 5.6 compability ([f610b5e](https://github.com/MakairaIO/oxid-connect/commit/f610b5e1a6c448848e4ef9290da254f157706992))
+* **touch-all:** fix unit tests ([4ce3711](https://github.com/MakairaIO/oxid-connect/commit/4ce3711493141c4f869239b7dc9a90e2c0fe63fd))
+
 # [2.9.0](https://github.com/MakairaIO/oxid-connect/compare/2.8.11...2.9.0) (2021-06-02)
 
 
