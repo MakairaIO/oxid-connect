@@ -34,7 +34,10 @@ const fetchAutosuggestions = debounce(event => {
       if (request.status >= 200 && request.status < 400) {
         // Succes -> we render the suggestions
         const response = request.responseText
-        renderAutosuggestions(response, inputContainer)
+        // only render dropdown if response was not empty, otherwise close it again
+        if(response.includes('autosuggestion__submit')) {renderAutosuggestions(response, inputContainer)}
+        else{renderAutosuggestions('', inputContainer)}
+
       } else {
         // We reached our target server, but it returned an error
         console.error('Processing in Makaira failed')
