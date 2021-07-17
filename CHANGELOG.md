@@ -1,3 +1,11 @@
+## [2.9.2](https://github.com/MakairaIO/oxid-connect/compare/2.9.1...2.9.2) (2021-07-17)
+
+
+### Bug Fixes
+
+* **Console:** Do not add shop-id option for OXID 6.2 EE ([dc8714b](https://github.com/MakairaIO/oxid-connect/commit/dc8714b0a3bb9ae6177f39b74bd0e67c01fde8f7))
+* **touch-all:** Don't add shop-id parameter for enterprise editions because its already added by oxid ([84be149](https://github.com/MakairaIO/oxid-connect/commit/84be149a20ec9a00fb0df1cc73e1a85cb8f4f5f8))
+
 ## [2.9.1](https://github.com/MakairaIO/oxid-connect/compare/2.9.0...2.9.1) (2021-06-16)
 
 
