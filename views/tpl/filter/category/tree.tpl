@@ -12,23 +12,23 @@
                 </button>
             </li>
         [{/if}]
-        <li class="makaira-filter__item[{if $item->selected}] makaira-filter__item--active[{/if}]">
-            [{if $item->count}]
+        <li class="makaira-filter__item[{if $item.selected}] makaira-filter__item--active[{/if}]">
+            [{if $item.count}]
                 <label class="makaira-filter__label">
                     <input
                             type="checkbox"
                             name="[{$oViewConf->getFilterParamName()}][[{$aggregation->key}]][]"
                             class="makaira-input makaira-input--checkbox"
-                            value="[{$item->key}]"
-                            [{if $item->selected}]checked="checked"[{/if}]
+                            value="[{$item.key}]"
+                            [{if $item.selected}]checked="checked"[{/if}]
                     />
-                    [{$item->title}] [{if $blShowDocCount && $item->count}]([{$item->count}])[{/if}]
+                    [{$item.title}] [{if $blShowDocCount && $item.count}]([{$item.count}])[{/if}]
                 </label>
             [{else}]
-                <span>[{$item->title}]</span>
+                <span>[{$item.title}]</span>
             [{/if}]
-            [{if $item->subtree}]
-                [{fun name="makaira_filter_tree" items=$item->subtree isInnerTree=true loopName="innerItems"}]
+            [{if $item.subtree}]
+                [{fun name="makaira_filter_tree" items=$item.subtree isInnerTree=true loopName="innerItems"}]
             [{/if}]
         </li>
 
