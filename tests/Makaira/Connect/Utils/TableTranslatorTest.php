@@ -10,7 +10,7 @@ class TableTranslatorTest extends \PHPUnit_Framework_TestCase
         $translator = new TableTranslator(['oxarticles',]);
 
         $sql = $translator->translate('SELECT * FROM oxarticles');
-        $this->assertEquals('SELECT * FROM oxv_oxarticles_de', $sql);
+        self::assertEquals('SELECT * FROM oxv_oxarticles_de', $sql);
     }
 
     public function testTranslateWithSetLanguage()
@@ -19,7 +19,7 @@ class TableTranslatorTest extends \PHPUnit_Framework_TestCase
         $translator->setLanguage('kh');
 
         $sql = $translator->translate('SELECT * FROM oxarticles');
-        $this->assertEquals('SELECT * FROM oxv_oxarticles_kh', $sql);
+        self::assertEquals('SELECT * FROM oxv_oxarticles_kh', $sql);
     }
 
     public function testTranslateWithView()
@@ -27,7 +27,7 @@ class TableTranslatorTest extends \PHPUnit_Framework_TestCase
         $translator = new TableTranslator(['oxarticles',]);
 
         $sql = $translator->translate('SELECT * FROM oxv_oxarticles_en');
-        $this->assertEquals('SELECT * FROM oxv_oxarticles_en', $sql);
+        self::assertEquals('SELECT * FROM oxv_oxarticles_en', $sql);
     }
 
     public function testMultiTranslate()
@@ -35,7 +35,7 @@ class TableTranslatorTest extends \PHPUnit_Framework_TestCase
         $translator = new TableTranslator(['oxarticles',]);
 
         $sql = $translator->translate('SELECT * FROM oxarticles WHERE oxarticles.OXACTIVE = 1');
-        $this->assertEquals('SELECT * FROM oxv_oxarticles_de WHERE oxv_oxarticles_de.OXACTIVE = 1', $sql);
+        self::assertEquals('SELECT * FROM oxv_oxarticles_de WHERE oxv_oxarticles_de.OXACTIVE = 1', $sql);
     }
 
     public function testTranslateWithMultipleTables()
@@ -43,7 +43,7 @@ class TableTranslatorTest extends \PHPUnit_Framework_TestCase
         $translator = new TableTranslator(['oxarticles', 'oxartextends']);
 
         $sql = $translator->translate('SELECT * FROM oxarticles LEFT JOIN oxartextends ON oxartextends.OXID = oxarticles.OXID');
-        $this->assertEquals('SELECT * FROM oxv_oxarticles_de LEFT JOIN oxv_oxartextends_de ON oxv_oxartextends_de.OXID = oxv_oxarticles_de.OXID', $sql);
+        self::assertEquals('SELECT * FROM oxv_oxarticles_de LEFT JOIN oxv_oxartextends_de ON oxv_oxartextends_de.OXID = oxv_oxarticles_de.OXID', $sql);
     }
 
     public function testTranslateWithPartialMatches()
@@ -51,6 +51,6 @@ class TableTranslatorTest extends \PHPUnit_Framework_TestCase
         $translator = new TableTranslator(['oxarticles',]);
 
         $sql = $translator->translate('SELECT * FROM oxarticles LEFT JOIN oxarticles2shop ON oxarticles2shop.OXMAPOBJECTID = oxarticles.OXMAPID');
-        $this->assertEquals('SELECT * FROM oxv_oxarticles_de LEFT JOIN oxarticles2shop ON oxarticles2shop.OXMAPOBJECTID = oxv_oxarticles_de.OXMAPID', $sql);
+        self::assertEquals('SELECT * FROM oxv_oxarticles_de LEFT JOIN oxarticles2shop ON oxarticles2shop.OXMAPOBJECTID = oxv_oxarticles_de.OXMAPID', $sql);
     }
 }

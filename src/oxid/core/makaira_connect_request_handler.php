@@ -337,7 +337,7 @@ class makaira_connect_request_handler
                     // Equal min and max values are not allowed
                     if ($aggregation->min == $aggregation->max) {
                         unset($aggregations[$aggregation->key]);
-                        continue;
+                        continue 2;
                     }
                     $aggregationFromKey = "{$aggregation->key}_from";
                     $aggregationToKey = "{$aggregation->key}_to";
@@ -358,7 +358,7 @@ class makaira_connect_request_handler
                     // Equal min and max values are not allowed
                     if ($aggregation->min == $aggregation->max) {
                         unset($aggregations[$aggregation->key]);
-                        continue;
+                        continue 2;
                     }
                     $aggregationFromKey = "{$aggregation->key}_from_price";
                     $aggregationToKey = "{$aggregation->key}_to_price";
