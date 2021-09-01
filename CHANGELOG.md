@@ -1,3 +1,10 @@
+# [2.10.0](https://github.com/MakairaIO/oxid-connect/compare/2.9.2...2.10.0) (2021-09-01)
+
+
+### Features
+
+* Add PHP compatibility checks ([e994643](https://github.com/MakairaIO/oxid-connect/commit/e994643b746ef745a1827ed7f44dadb43816b1bd))
+
 ## [2.9.2](https://github.com/MakairaIO/oxid-connect/compare/2.9.1...2.9.2) (2021-07-17)
 
 
