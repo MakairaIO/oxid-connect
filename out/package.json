@@ -32,7 +32,7 @@
     "randomatic": "^3.0.0",
     "stylus": "^0.54.8",
     "uglify-js": "^3.12.7",
-    "watchify": "^3.11.1"
+    "watchify": "^4.0.0"
   },
   "dependencies": {
     "nouislider": "^10.1.0"
