@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
         consentBanner.style.display = 'block';
         document.querySelector('#cookieConsentBanner').addEventListener('click', clickEvent => {
             if (clickEvent.target.dataset.consentDecision) {
-                document.cookie = 'cookie-consent=' + clickEvent.target.dataset.consentDecision;
+                const halfAYear = 60*60*24*182;
+                document.cookie = 'cookie-consent=' + clickEvent.target.dataset.consentDecision + ';max-age=' + halfAYear;
                 consentBanner.style.display = 'none';
             }
         });
