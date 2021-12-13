@@ -304,15 +304,15 @@ class makaira_connect_request_handler
     {
         if ($cats && $selectedCats) {
             foreach ($cats as $cat) {
-                $key = array_search($cat->key, (array) $selectedCats);
+                $key = array_search($cat['key'], (array) $selectedCats);
                 if (false !== $key) {
-                    $cat->selected        = true;
-                    $selectedCats[ $key ] = $cat->title;
+                    $cat['selected']        = true;
+                    $selectedCats[ $key ] = $cat['title'];
                 } else {
-                    $cat->selected = false;
+                    $cat['selected'] = false;
                 }
-                if ($cat->subtree) {
-                    $this->mapCategoryTitle($cat->subtree, $selectedCats);
+                if ($cat['subtree']) {
+                    $this->mapCategoryTitle($cat['subtree'], $selectedCats);
                 }
             }
         }
@@ -337,7 +337,7 @@ class makaira_connect_request_handler
                     // Equal min and max values are not allowed
                     if ($aggregation->min == $aggregation->max) {
                         unset($aggregations[$aggregation->key]);
-                        continue;
+                        continue 2;
                     }
                     $aggregationFromKey = "{$aggregation->key}_from";
                     $aggregationToKey = "{$aggregation->key}_to";
@@ -358,7 +358,7 @@ class makaira_connect_request_handler
                     // Equal min and max values are not allowed
                     if ($aggregation->min == $aggregation->max) {
                         unset($aggregations[$aggregation->key]);
-                        continue;
+                        continue 2;
                     }
                     $aggregationFromKey = "{$aggregation->key}_from_price";
                     $aggregationToKey = "{$aggregation->key}_to_price";
@@ -376,10 +376,6 @@ class makaira_connect_request_handler
 
                     break;
                 case 'categorytree':
-                    // TODO: find better way to convert multi-array to multi-stdobject
-                    $aggregations[$aggregation->key]->values =
-                        json_decode(json_encode($aggregations[$aggregation->key]->values));
-
                     $aggregations[$aggregation->key]->selectedValues =
                         isset($query->aggregations[$aggregation->key]) ?
                             $unmodifiedQuery->aggregations[$aggregation->key] : [];
