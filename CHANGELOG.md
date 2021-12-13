@@ -1,3 +1,10 @@
+## [2.10.1](https://github.com/MakairaIO/oxid-connect/compare/2.10.0...2.10.1) (2021-12-13)
+
+
+### Bug Fixes
+
+* **Cookie Consent:** Adds maxage to cookie to show only once every half a year ([c23c5ad](https://github.com/MakairaIO/oxid-connect/commit/c23c5ade8f9ea8638d93bf953b73d62c9c91a363))
+
 # [2.10.0](https://github.com/MakairaIO/oxid-connect/compare/2.9.2...2.10.0) (2021-09-01)
 
 
