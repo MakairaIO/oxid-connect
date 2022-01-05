@@ -1,3 +1,10 @@
+## [2.10.2](https://github.com/MakairaIO/oxid-connect/compare/2.10.1...2.10.2) (2022-01-05)
+
+
+### Bug Fixes
+
+* **libs:** Use shared-libs of github/packagist ([11ec708](https://github.com/MakairaIO/oxid-connect/commit/11ec7082c379ffc90ed312b1e2c54d2c1ccbd28d))
+
 ## [2.10.1](https://github.com/MakairaIO/oxid-connect/compare/2.10.0...2.10.1) (2021-12-13)
 
 
