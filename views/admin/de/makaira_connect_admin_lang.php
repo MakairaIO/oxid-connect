@@ -20,11 +20,11 @@ $aLang = [
 
     'SHOP_MODULE_GROUP_OPERATIONAL_INTELLIGENCE'    => 'Personalisierung',
     'SHOP_MODULE_makaira_connect_use_econda'        => 'Econda Unterstützung aktivieren',
-    'HELP_SHOP_MODULE_makaira_connect_use_econda'   => '???',
+    'HELP_SHOP_MODULE_makaira_connect_use_econda'   => 'Bitte tragen Sie Ihre Econda Zugangsdaten ein um die Suchergebnisse mittel Econda zu sortieren.',
     'SHOP_MODULE_makaira_connect_econda_aid'        => 'Econda Account ID',
     'SHOP_MODULE_makaira_connect_econda_cid'        => 'Econda Container ID',
     'SHOP_MODULE_makaira_connect_use_odoscope'      => 'Odoscope Unterstützung aktivieren',
-    'HELP_SHOP_MODULE_makaira_connect_use_odoscope' => '???',
+    'HELP_SHOP_MODULE_makaira_connect_use_odoscope' => 'Bitte tragen Sie Ihre Odoscope Zugangsdaten ein um die Suchergebnisse mittel Odoscope zu sortieren.',
     'SHOP_MODULE_makaira_connect_odoscope_siteid'   => 'Odoscope Site ID',
     'SHOP_MODULE_makaira_connect_odoscope_token'    => 'Odoscope Endpoint Token',
 

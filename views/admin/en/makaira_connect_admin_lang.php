@@ -20,11 +20,11 @@ $aLang = [
 
     'SHOP_MODULE_GROUP_OPERATIONAL_INTELLIGENCE'    => 'Personalization',
     'SHOP_MODULE_makaira_connect_use_econda'        => 'Use Econda Support',
-    'HELP_SHOP_MODULE_makaira_connect_use_econda'   => '???',
+    'HELP_SHOP_MODULE_makaira_connect_use_econda'   => 'Please enter your Econda access data to sort the search results by Econda.',
     'SHOP_MODULE_makaira_connect_econda_aid'        => 'Econda Account ID',
     'SHOP_MODULE_makaira_connect_econda_cid'        => 'Econda Container ID',
     'SHOP_MODULE_makaira_connect_use_odoscope'      => 'Use Odoscope Support',
-    'HELP_SHOP_MODULE_makaira_connect_use_odoscope' => '???',
+    'HELP_SHOP_MODULE_makaira_connect_use_odoscope' => 'Please enter your Odoscope access data to sort the search results by Odoscope.',
     'SHOP_MODULE_makaira_connect_odoscope_siteid'   => 'Odoscope Site ID',
     'SHOP_MODULE_makaira_connect_odoscope_token'    => 'Odoscope Endpoint Token',
 
