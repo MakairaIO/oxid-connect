@@ -1,3 +1,10 @@
+# [2.11.0](https://github.com/MakairaIO/oxid-connect/compare/2.10.2...2.11.0) (2022-03-30)
+
+
+### Features
+
+* Add conflict for essential module ([e278362](https://github.com/MakairaIO/oxid-connect/commit/e2783621bdd404dcf9582b8c3b2eedbd42e078ea))
+
 ## [2.10.2](https://github.com/MakairaIO/oxid-connect/compare/2.10.1...2.10.2) (2022-01-05)
 
 
