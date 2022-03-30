@@ -61,5 +61,8 @@
     "platform": {
         "php": "5.6.40"
     }
+  },
+  "conflict": {
+    "makaira/oxid-connect-essential": "*"
   }
 }
