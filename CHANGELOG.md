@@ -1,3 +1,10 @@
+## [2.11.1](https://github.com/MakairaIO/oxid-connect/compare/2.11.0...2.11.1) (2022-09-20)
+
+
+### Bug Fixes
+
+* Update shared libraries ([#32](https://github.com/MakairaIO/oxid-connect/issues/32)) ([9a7c15e](https://github.com/MakairaIO/oxid-connect/commit/9a7c15e41679afbe40713be1afb841c9ff9ca9a6))
+
 # [2.11.0](https://github.com/MakairaIO/oxid-connect/compare/2.10.2...2.11.0) (2022-03-30)
 
 
