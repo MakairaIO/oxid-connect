@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bf00e79d633c6f5b494319722db849df",
+    "content-hash": "09c99d097fb27cf088bc5a2fd691b8d4",
     "packages": [
         {
             "name": "composer/installers",
@@ -140,16 +140,16 @@
         },
         {
             "name": "kore/data-object",
-            "version": "1.2",
+            "version": "1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kore/DataObject.git",
-                "reference": "f1ea02846690f546eb01e117fb6c876a5cd11f7f"
+                "reference": "ea2d6cd1c91d81131d7e537e8d8b038321b26e67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kore/DataObject/zipball/f1ea02846690f546eb01e117fb6c876a5cd11f7f",
-                "reference": "f1ea02846690f546eb01e117fb6c876a5cd11f7f",
+                "url": "https://api.github.com/repos/kore/DataObject/zipball/ea2d6cd1c91d81131d7e537e8d8b038321b26e67",
+                "reference": "ea2d6cd1c91d81131d7e537e8d8b038321b26e67",
                 "shasum": ""
             },
             "require-dev": {
@@ -170,24 +170,28 @@
                 "MIT"
             ],
             "description": "Simple base class for data objects.",
-            "time": "2019-04-07T12:33:47+00:00"
+            "support": {
+                "issues": "https://github.com/kore/DataObject/issues",
+                "source": "https://github.com/kore/DataObject/tree/1.3"
+            },
+            "time": "2019-09-27T09:41:36+00:00"
         },
         {
             "name": "makaira/shared-libs",
-            "version": "2021.11.1",
+            "version": "2022.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MakairaIO/shared-libs.git",
-                "reference": "2d44adbee328e1f3260f1e38c48386326e9033d4"
+                "reference": "a1c7ae5bc026ce675d0defaf071503750da7cf2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MakairaIO/shared-libs/zipball/2d44adbee328e1f3260f1e38c48386326e9033d4",
-                "reference": "2d44adbee328e1f3260f1e38c48386326e9033d4",
+                "url": "https://api.github.com/repos/MakairaIO/shared-libs/zipball/a1c7ae5bc026ce675d0defaf071503750da7cf2f",
+                "reference": "a1c7ae5bc026ce675d0defaf071503750da7cf2f",
                 "shasum": ""
             },
             "require": {
-                "kore/data-object": "1.2"
+                "kore/data-object": "1.3"
             },
             "require-dev": {
                 "pdepend/pdepend": "@stable",
@@ -202,7 +206,11 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "time": "2021-11-02T22:06:09+00:00"
+            "support": {
+                "issues": "https://github.com/MakairaIO/shared-libs/issues",
+                "source": "https://github.com/MakairaIO/shared-libs/tree/2022.1.1"
+            },
+            "time": "2022-07-18T12:13:58+00:00"
         }
     ],
     "packages-dev": [
@@ -2845,10 +2853,11 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.6.0"
+        "php": ">=7.0.0"
     },
     "platform-dev": [],
     "platform-overrides": {
-        "php": "5.6.40"
-    }
+        "php": "7.0.33"
+    },
+    "plugin-api-version": "2.2.0"
 }
