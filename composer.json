@@ -24,9 +24,9 @@
     }
   },
   "require": {
-    "php": ">=5.6.0",
+    "php": ">=7.0.0",
     "composer/installers": "^1.9.0",
-    "makaira/shared-libs": "^2021.11"
+    "makaira/shared-libs": "^2021.11 || ^2022.1.1"
   },
   "scripts": {
     "check-php": [
@@ -35,8 +35,10 @@
       "@check-php:7.2",
       "@check-php:7.3",
       "@check-php:7.4",
-      "@check-php:8.0"
+      "@check-php:8.0",
+      "@check-php:8.1"
     ],
+    "check-php:8.1": "phpcs -p --standard=vendor/phpcompatibility/php-compatibility/PHPCompatibility --runtime-set testVersion 8.1 ./src/ ./tests/",
     "check-php:8.0": "phpcs -p --standard=vendor/phpcompatibility/php-compatibility/PHPCompatibility --runtime-set testVersion 8.0 ./src/ ./tests/",
     "check-php:7.4": "phpcs -p --standard=vendor/phpcompatibility/php-compatibility/PHPCompatibility --runtime-set testVersion 7.4 ./src/ ./tests/",
     "check-php:7.3": "phpcs -p --standard=vendor/phpcompatibility/php-compatibility/PHPCompatibility --runtime-set testVersion 7.3 ./src/ ./tests/",
@@ -59,10 +61,10 @@
   },
   "config": {
     "platform": {
-        "php": "5.6.40"
+        "php": "7.0.33"
+    },
+    "allow-plugins": {
+      "composer/installers": true
     }
-  },
-  "conflict": {
-    "makaira/oxid-connect-essential": "*"
   }
 }
