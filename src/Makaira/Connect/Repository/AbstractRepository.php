@@ -52,7 +52,7 @@ abstract class AbstractRepository
             return $change;
         }
 
-        $type         = $this->getInstance($result[0]);
+        $type         = $this->getInstance($id);
         $type         = $this->modifiers->applyModifiers($type, $this->getType());
         $change->data = $type;
 
