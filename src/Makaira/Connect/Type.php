@@ -2,9 +2,7 @@
 
 namespace Makaira\Connect;
 
-use Kore\DataObject\DataObject;
-
-class Type extends DataObject
+class Type
 {
     /* primary es id field */
     public $es_id;
@@ -21,48 +19,30 @@ class Type extends DataObject
     /* additional data array */
     public $additionalData = [];
 
+    public function __construct(array $values = [])
+    {
+        foreach ($values as $name => $value) {
+            $this->{$name} = $value;
+        }
+    }
+
     public function __set($name, $value)
     {
-        try {
-            parent::__set($name, $value);
-        } catch (\Exception $e) {
-            // catch exception on unknown fields
-            // unknown fields will be added to additional data array
-            $this->additionalData[ $name ] = $value;
-        }
+        $this->additionalData[$name] = $value;
     }
 
     public function __get($name)
     {
-        try {
-            parent::__get($name);
-        } catch (\Exception $e) {
-            // catch exception on unknown fields
-            // unknown fields are added to additional data array
-            if (!array_key_exists($name, $this->additionalData)) {
-                throw $e;
-            }
-            return $this->additionalData[ $name ];
-        }
+        return $this->additionalData[$name] ?? null;
     }
 
     public function __isset($name)
     {
-        // unknown fields are added to additional data array
-        return isset($this->additionalData[ $name ]);
+        return isset($this->additionalData[$name]);
     }
 
     public function __unset($name)
     {
-        try {
-            parent::__unset($name);
-        } catch (\Exception $e) {
-            // catch exception on unknown fields
-            // unknown fields are added to additional data array
-            if (!array_key_exists($name, $this->additionalData)) {
-                throw $e;
-            }
-            unset($this->additionalData[ $name ]);
-        }
+        unset($this->additionalData[$name]);
     }
 }
