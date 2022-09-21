@@ -1,3 +1,10 @@
+## [2.11.2](https://github.com/MakairaIO/oxid-connect/compare/2.11.1...2.11.2) (2022-09-21)
+
+
+### Bug Fixes
+
+* Remove base class for object types ([#33](https://github.com/MakairaIO/oxid-connect/issues/33)) ([05f97c3](https://github.com/MakairaIO/oxid-connect/commit/05f97c392c21d9b5b6b66146ef2c3b5d0fd1fd42))
+
 ## [2.11.1](https://github.com/MakairaIO/oxid-connect/compare/2.11.0...2.11.1) (2022-09-20)
 
 
