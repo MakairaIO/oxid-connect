@@ -65,7 +65,10 @@ $aModule = [
         'makaira_connect_autosuggest'     => "{$moduleId}/src/oxid/application/controllers/makaira_connect_autosuggest.php",
         'makaira_connect_econda'          => "{$moduleId}/src/oxid/application/controllers/makaira_connect_econda.php",
         'makaira_tracking_data_generator' => "{$moduleId}/src/oxid/core/makaira_tracking_data_generator.php",
-        'makaira_cookie_utils'            => "{$moduleId}/src/oxid/core/makaira_cookie_utils.php"
+        'makaira_cookie_utils'            => "{$moduleId}/src/oxid/core/makaira_cookie_utils.php",
+        "makairareviewcontroller"         => \Makaira\Connect\Controller\ReviewController::class,
+        "makairausercontroller"           => \Makaira\Connect\Controller\UserController::class,
+        "makairacartcontroller"           => \Makaira\Connect\Controller\CartController::class,
     ],
     'templates'   => [
         'makaira_connect_single_sign_on.tpl'           => "{$moduleId}/views/admin/tpl/makaira_connect_single_sign_on.tpl",
