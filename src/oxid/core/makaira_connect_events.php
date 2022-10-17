@@ -112,14 +112,14 @@ class makaira_connect_events
      */
     private static function addColumnsToOxobject2category($isOxid6 = false)
     {
-        $sSql = "ALTER TABLE oxobject2category
-                     ADD OXSHOPID VARCHAR(32) NOT NULL DEFAULT 'oxbaseshop'";
-        if ($isOxid6) {
-            $sSql = "ALTER TABLE oxobject2category
-                     ADD OXSHOPID INT(11) NOT NULL DEFAULT 1";
-        }
-
         if (!self::hasColumn('oxobject2category', 'OXSHOPID')) {
+            $sSql = "ALTER TABLE oxobject2category
+                         ADD OXSHOPID VARCHAR(32) NOT NULL DEFAULT 'oxbaseshop'";
+            if ($isOxid6) {
+                $sSql = "ALTER TABLE oxobject2category
+                         ADD OXSHOPID INT(11) NOT NULL DEFAULT 1";
+            }
+
             oxDb::getDb()->execute($sSql);
         }
     }
