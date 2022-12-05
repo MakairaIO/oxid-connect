@@ -4,7 +4,7 @@ use Exception;
 use Makaira\Connect\Service\ReviewService;
 use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
 
-class makairareviewcontroller extends makaira_connect_basecontroller
+class makaira_connect_reviewcontroller extends makaira_connect_basecontroller
 {
     private $reviewService;
 

@@ -114,10 +114,9 @@ class makaira_connect_events
     {
         if (!self::hasColumn('oxobject2category', 'OXSHOPID')) {
             $sSql = "ALTER TABLE oxobject2category
-                         ADD OXSHOPID VARCHAR(32) NOT NULL DEFAULT 'oxbaseshop'";
+                     ADD OXSHOPID VARCHAR(32) NOT NULL DEFAULT 'oxbaseshop'";
             if ($isOxid6) {
-                $sSql = "ALTER TABLE oxobject2category
-                         ADD OXSHOPID INT(11) NOT NULL DEFAULT 1";
+                $sSql = "ALTER TABLE oxobject2category ADD OXSHOPID INT(11) NOT NULL DEFAULT 1";
             }
 
             oxDb::getDb()->execute($sSql);

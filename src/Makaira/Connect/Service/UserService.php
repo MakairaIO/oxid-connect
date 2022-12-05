@@ -26,7 +26,7 @@ class UserService
     public function login(string $username, string $password, bool $rememberLogin): User
     {
         /** @var User $user */
-        $user = oxNew(User::class);
+        $user = oxNew('oxuser');
 
         $user->login($username, $password, $rememberLogin);
 
@@ -51,7 +51,7 @@ class UserService
 
     public function logout(): void
     {
-        $user = oxNew(User::class);
+        $user = oxNew('oxuser');
         $user->logout();
 
         // after logout

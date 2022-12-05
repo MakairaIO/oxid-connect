@@ -9,7 +9,7 @@ use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
 /**
  * @SuppressWarnings(PHPMD.ElseExpression)
  */
-class makairausercontroller extends makaira_connect_basecontroller
+class makaira_connect_usercontroller extends makaira_connect_basecontroller
 {
     private $userService;
 

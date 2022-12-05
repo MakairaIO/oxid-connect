@@ -5,7 +5,7 @@ use Makaira\Connect\Exception\InvalidCartItem;
 use Makaira\Connect\Service\CartService;
 use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
 
-class makairacartcontroller extends makaira_connect_basecontroller
+class makaira_connect_cartcontroller extends makaira_connect_basecontroller
 {
     private $cartService;
 

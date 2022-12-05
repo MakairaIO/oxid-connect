@@ -17,7 +17,7 @@ class ReviewService
 {
     public function getReviews(string $productId, ?int $limit = null, ?int $offset = 0): array
     {
-        $product = oxNew(Article::class);
+        $product = oxNew('oxarticle');
         $isLoaded = $product->load($productId);
 
         if (!$isLoaded) {
@@ -41,7 +41,7 @@ class ReviewService
             /** @var string $userId */
             $userId = $review->getFieldData('oxuserid');
 
-            $user = oxNew(User::class);
+            $user = oxNew('oxuser');
             $user->load($userId);
 
             /** @var string $firstName */
@@ -66,7 +66,7 @@ class ReviewService
      */
     public function createReview(string $productId, int $rating, string $text, User $user): void
     {
-        $product = oxNew(Article::class);
+        $product = oxNew('oxarticle');
         $isLoaded = $product->load($productId);
 
         if (!$isLoaded) {
@@ -74,7 +74,7 @@ class ReviewService
         }
 
         if ($rating >= 1 && $rating <= 5) {
-            $ratingModel = oxNew(Rating::class);
+            $ratingModel = oxNew('oxrating');
             if ($ratingModel->allowRating($user->getId(), 'oxarticle', $product->getId())) {
                 $ratingModel->assign(
                     [
@@ -91,7 +91,7 @@ class ReviewService
 
         $reviewText = trim($text);
         if ($reviewText) {
-            $review = oxNew(Review::class);
+            $review = oxNew('oxreview');
             $review->assign(
                 [
                     'oxobjectid' => $product->getId(),
