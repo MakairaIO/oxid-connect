@@ -12,7 +12,7 @@ namespace Makaira\Connect\Event;
 
 use Makaira\Connect\Modifier;
 use Makaira\Connect\Repository\ModifierList;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class ModifierCollectEvent extends Event
 {
