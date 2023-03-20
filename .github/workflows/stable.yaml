@@ -1,8 +1,11 @@
 name: Stable Branch Workflow
 on:
   push:
-    branches:
-      - stable
+    branches: [ "[0-9]+.x", "stable" ]
+  workflow_dispatch: ~
+  pull_request:
+    branches: [ "[0-9]+.x", "stable" ]
+    types: [ opened, synchronize, reopened ]
 
 jobs:
   test:
@@ -32,8 +35,10 @@ jobs:
 
       - name: Run phpmd
         run: php vendor/bin/phpmd src/Makaira/ text codesize,design
+
   release:
     name: Create a new release
+    if: github.event_name != 'pull_request'
     needs: test
     runs-on: ubuntu-latest
     steps:
