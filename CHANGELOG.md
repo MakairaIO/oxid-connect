@@ -1,3 +1,15 @@
+# [4.0.0](https://github.com/MakairaIO/oxid-connect/compare/3.0.0...4.0.0) (2023-03-21)
+
+
+### Features
+
+* Update module for OXID 6.5 compability ([#44](https://github.com/MakairaIO/oxid-connect/issues/44)) ([776847b](https://github.com/MakairaIO/oxid-connect/commit/776847b905d43add79b43dd72292d1ba4c6ed4f6))
+
+
+### BREAKING CHANGES
+
+* with these changes the module is no longer able to run on OXID before 6.5
+
 # [3.0.0](https://github.com/MakairaIO/oxid-connect/compare/2.11.2...3.0.0) (2023-03-21)
 
 
