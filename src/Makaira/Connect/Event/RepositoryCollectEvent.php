@@ -12,7 +12,7 @@ namespace Makaira\Connect\Event;
 
 use Makaira\Connect\Repository;
 use Makaira\Connect\Repository\AbstractRepository;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class RepositoryCollectEvent extends Event
 {

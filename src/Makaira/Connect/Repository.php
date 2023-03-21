@@ -134,7 +134,7 @@ class Repository
         $this->database           = $database;
         $this->parentsPurchasable = (bool) $parentsPurchasable;
 
-        $dispatcher->dispatch('makaira.connect.repository', new Event\RepositoryCollectEvent($this));
+        $dispatcher->dispatch(new Event\RepositoryCollectEvent($this), 'makaira.connect.repository');
     }
 
     public function addRepositoryMapping(AbstractRepository $repository)
