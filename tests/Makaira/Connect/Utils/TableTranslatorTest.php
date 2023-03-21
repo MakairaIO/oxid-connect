@@ -3,7 +3,9 @@
 namespace Makaira\Connect\Utils;
 
 
-class TableTranslatorTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class TableTranslatorTest extends TestCase
 {
     public function testSimpleTranslate()
     {

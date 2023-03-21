@@ -4,12 +4,13 @@ namespace Makaira\Connect\Repository;
 
 use Makaira\Connect\Type;
 use Makaira\Connect\Modifier;
+use PHPUnit\Framework\TestCase;
 
-class ModifierListTest extends \PHPUnit_Framework_TestCase
+class ModifierListTest extends TestCase
 {
     public function testApplyModifier()
     {
-        $modifier = $this->getMock(Modifier::class);
+        $modifier = $this->createMock(Modifier::class);
         $type = new Type();
 
         $modifier

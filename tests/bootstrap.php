@@ -4,9 +4,6 @@ if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
     require_once __DIR__ . '/../vendor/autoload.php';
 }
 
-require_once __DIR__ . '/Makaira/Connect/IntegrationTest.php';
-
-
 if (!class_exists('oxDb')) {
     require_once __DIR__ . '/Makaira/Connect/OxidMocks/oxDb.php';
 }

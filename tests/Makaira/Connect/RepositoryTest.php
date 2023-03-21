@@ -8,165 +8,22 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class RepositoryTest extends UnitTestCase
 {
-    /*public function testGetChangesForEmptyResult()
-    {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $repository = new Repository($databaseMock);
-
-        $databaseMock
-            ->expects($this->any())
-            ->method('query')
-            ->will($this->returnValue([]));
-
-        $result = $repository->getChangesSince(0, 50);
-
-        $this->assertEquals(
-            new Changes([
-                'since' => 0,
-                'count' => 0,
-                'requestedCount' => 50,
-                'changes' => [],
-            ]),
-            $result
-        );
-    }*/
-
-    /*public function testGetChangesForSingleResult()
-    {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $repositoryMock = $this->getMock(AbstractRepository::class, [], [$databaseMock, $this->getMock(ModifierList::class, [], [], '', false)]);
-        $repository = new Repository($databaseMock, ['product' => $repositoryMock]);
-
-        $databaseMock
-            ->expects($this->any())
-            ->method('query')
-            ->will($this->returnValue([
-                ['id' => 42, 'sequence' => 1, 'type' => 'product']
-            ]));
-
-        $repositoryMock
-            ->expects($this->any())
-            ->method('get')
-            ->with(42)
-            ->will($this->returnValue(new Change(['data' => 'product-42'])));
-
-        $result = $repository->getChangesSince(0, 50);
-
-        $this->assertEquals(
-            new Changes([
-                'since' => 0,
-                'count' => 1,
-                'requestedCount' => 50,
-                'changes' => [
-                    new Change([
-                        'id' => 42,
-                        'sequence' => 1,
-                        'data' => 'product-42',
-                        'type' => 'product',
-                    ])
-                ],
-            ]),
-            $result
-        );
-    }*/
-
-    /*public function testGetChangesFromInvalidRepository()
-    {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $repository = new Repository($databaseMock, []);
-
-        $databaseMock
-            ->expects($this->any())
-            ->method('query')
-            ->will($this->returnValue([
-                ['id' => 42, 'sequence' => 1, 'type' => 'unknown']
-            ]));
-
-        $result = $repository->getChangesSince(0, 50);
-        $this->assertEquals(
-            new Changes([
-                'since' => 0,
-                'count' => 0,
-                'requestedCount' => 50,
-                'changes' => [],
-            ]),
-            $result
-        );
-    }*/
-
-    /*public function testGetChangesForMultipleResults()
-    {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $repositoryMock = $this->getMock(AbstractRepository::class, [], [$databaseMock, $this->getMock(ModifierList::class, [], [], '', false)]);
-        $repository = new Repository($databaseMock, [
-            'firstRepo' => $repositoryMock,
-            'secondRepo' => $repositoryMock,
-        ]);
-
-        $databaseMock
-            ->expects($this->any())
-            ->method('query')
-            ->will($this->returnValue([
-                ['id' => 42, 'sequence' => 1, 'type' => 'firstRepo'],
-                ['id' => 43, 'sequence' => 2, 'type' => 'secondRepo'],
-                ['id' => 44, 'sequence' => 3, 'type' => 'firstRepo'],
-            ]));
-
-        $repositoryMock
-            ->expects($this->any())
-            ->method('get')
-            ->will($this->returnCallback(function () {
-                return new Change(['data' => 'data']);
-            }));
-
-        $result = $repository->getChangesSince(0, 50);
-
-        $this->assertEquals(
-            new Changes([
-                'since' => 0,
-                'count' => 3,
-                'requestedCount' => 50,
-                'changes' => [
-                    // This order MUST NOT change
-                    new Change([
-                        'id' => 42,
-                        'sequence' => 1,
-                        'data' => 'data',
-                        'type' => 'firstRepo',
-                    ]),
-                    new Change([
-                        'id' => 43,
-                        'sequence' => 2,
-                        'data' => 'data',
-                        'type' => 'secondRepo',
-                    ]),
-                    new Change([
-                        'id' => 44,
-                        'sequence' => 3,
-                        'data' => 'data',
-                        'type' => 'firstRepo',
-                    ]),
-                ],
-            ]),
-            $result
-        );
-    }*/
-
     public function testTouchExecutesQuery()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
+        $databaseMock = $this->createMock(DatabaseInterface::class);
         $repository = new Repository($databaseMock, new EventDispatcher(), false);
 
         $databaseMock
+            ->expects($this->once())
             ->method('execute')
-            ->withConsecutive($this->stringContains('REPLACE INTO'), ['type' => 'product', 'id' => 42]);
+            ->withConsecutive([$this->stringContains('REPLACE INTO'), ['type' => 'product', 'id' => 42]]);
 
         $repository->touch('product', 42);
     }
 
     public function testTouchAllOneRepository()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
+        $databaseMock = $this->createMock(DatabaseInterface::class);
         $databaseMock
             ->expects($this->exactly(4))
             ->method('execute')
@@ -176,15 +33,14 @@ class RepositoryTest extends UnitTestCase
                 [$this->stringContains('REPLACE INTO'), ['type' => 'firstRepo', 'id' => 2]],
                 [$this->stringContains('REPLACE INTO'), ['type' => 'firstRepo', 'id' => 3]]
                 );
-        $repositoryMock1 = $this->getMock(
-            AbstractRepository::class,
-            [],
-            [
-                $databaseMock,
-                $this->getMock(ModifierList::class, [], [], '', false),
-                $this->getTableTranslatorMock()
-            ]
-        );
+        $repositoryMock1 = $this->getMockBuilder(AbstractRepository::class)
+            ->disableOriginalClone()
+            ->disableArgumentCloning()
+            ->disallowMockingUnknownTypes()
+            ->setConstructorArgs(
+                [$databaseMock, $this->createMock(ModifierList::class), $this->getTableTranslatorMock()]
+            )
+            ->getMock();
         $repositoryMock1
             ->expects($this->once())
             ->method('getType')
@@ -200,7 +56,7 @@ class RepositoryTest extends UnitTestCase
 
     public function testTouchAllMultipleRepositories()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
+        $databaseMock = $this->createMock(DatabaseInterface::class);
         $databaseMock
             ->expects($this->exactly(5))
             ->method('execute')
@@ -211,12 +67,14 @@ class RepositoryTest extends UnitTestCase
                 [$this->stringContains('REPLACE INTO'), ['type' => 'firstRepo', 'id' => 3]],
                 [$this->stringContains('REPLACE INTO'), ['type' => 'secondRepo', 'id' => 4]]
             );
-        $repositoryMock1 =
-            $this->getMock(
-                AbstractRepository::class,
-                [],
-                [$databaseMock, $this->getMock(ModifierList::class, [], [], '', false), $this->getTableTranslatorMock()]
-            );
+        $repositoryMock1 = $this->getMockBuilder(AbstractRepository::class)
+            ->disableOriginalClone()
+            ->disableArgumentCloning()
+            ->disallowMockingUnknownTypes()
+            ->setConstructorArgs(
+                [$databaseMock, $this->createMock(ModifierList::class), $this->getTableTranslatorMock()]
+            )
+            ->getMock();
         $repositoryMock1
             ->expects($this->once())
             ->method('getType')
@@ -225,12 +83,15 @@ class RepositoryTest extends UnitTestCase
             ->expects($this->once())
             ->method('getAllIds')
             ->willReturn([1, 2, 3]);
-        $repositoryMock2 =
-            $this->getMock(
-                AbstractRepository::class,
-                [],
-                [$databaseMock, $this->getMock(ModifierList::class, [], [], '', false), $this->getTableTranslatorMock()]
-            );
+
+        $repositoryMock2 = $this->getMockBuilder(AbstractRepository::class)
+            ->disableOriginalClone()
+            ->disableArgumentCloning()
+            ->disallowMockingUnknownTypes()
+            ->setConstructorArgs(
+                [$databaseMock, $this->createMock(ModifierList::class), $this->getTableTranslatorMock()]
+            )
+            ->getMock();
         $repositoryMock2
             ->expects($this->once())
             ->method('getType')

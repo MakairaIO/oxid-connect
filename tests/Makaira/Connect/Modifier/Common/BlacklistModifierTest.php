@@ -11,8 +11,9 @@
 namespace Makaira\Connect\Modifier\Common;
 
 use Makaira\Connect\Type\Common\BaseProduct;
+use PHPUnit\Framework\TestCase;
 
-class BlacklistModifierTest extends \PHPUnit_Framework_TestCase
+class BlacklistModifierTest extends TestCase
 {
     private function productFactory($skipFields = [])
     {

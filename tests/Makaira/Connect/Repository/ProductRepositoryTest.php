@@ -11,8 +11,8 @@ class ProductRepositoryTest extends UnitTestCase
 {
     public function testLoadProduct()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
+        $databaseMock = $this->createMock(DatabaseInterface::class);
+        $modifiersMock = $this->createMock(ModifierList::class);
 
         $repository = new ProductRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
 
@@ -40,8 +40,8 @@ class ProductRepositoryTest extends UnitTestCase
 
     public function testSetDeletedMarker()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
+        $databaseMock = $this->createMock(DatabaseInterface::class);
+        $modifiersMock = $this->createMock(ModifierList::class);
 
         $repository = new ProductRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
 
@@ -67,8 +67,8 @@ class ProductRepositoryTest extends UnitTestCase
 
     public function testRunModifierLoadProduct()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
+        $databaseMock = $this->createMock(DatabaseInterface::class);
+        $modifiersMock = $this->createMock(ModifierList::class);
 
         $repository = new ProductRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
 
@@ -95,8 +95,8 @@ class ProductRepositoryTest extends UnitTestCase
 
     public function testGetAllIds()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
+        $databaseMock = $this->createMock(DatabaseInterface::class);
+        $modifiersMock = $this->createMock(ModifierList::class);
 
         $repository = new ProductRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
 

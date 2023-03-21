@@ -9,10 +9,14 @@ class UnitTestCase extends TestCase
 {
     protected function getTableTranslatorMock()
     {
-        return $this->getMock(
-            TableTranslator::class,
-            ['translate'],
-            [['oxarticles', 'oxartextends', 'oxattribute', 'oxcategories', 'oxmanufacturers', 'oxobject2attribute']]
-        );
+        return $this->getMockBuilder(TableTranslator::class)
+            ->setConstructorArgs(
+                [['oxarticles', 'oxartextends', 'oxattribute', 'oxcategories', 'oxmanufacturers', 'oxobject2attribute']]
+            )
+            ->setMethodsExcept(['translate'])
+            ->disallowMockingUnknownTypes()
+            ->disableOriginalClone()
+            ->disableArgumentCloning()
+            ->getMock();
     }
 }

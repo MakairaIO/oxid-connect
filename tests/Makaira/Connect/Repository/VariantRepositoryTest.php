@@ -110,8 +110,8 @@ class VariantRepositoryTest extends UnitTestCase
      */
     private function createVariantRepository()
     {
-        $databaseMock        = $this->getMock(DatabaseInterface::class);
-        $modifiersMock       = $this->getMock(ModifierList::class, [], [], '', false);
+        $databaseMock        = $this->createMock(DatabaseInterface::class);
+        $modifiersMock       = $this->createMock(ModifierList::class);
         $repository          = new VariantRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
 
         return [$databaseMock, $modifiersMock, $repository];
