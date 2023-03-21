@@ -10,11 +10,11 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class ModifierList
 {
     /** @var Modifier[] */
-    private $modifiers = [];
+    private array $modifiers = [];
 
     public function __construct($tag, EventDispatcherInterface $dispatcher)
     {
-        $dispatcher->dispatch($tag, new ModifierCollectEvent($this));
+        $dispatcher->dispatch(new ModifierCollectEvent($this), $tag);
     }
 
     /**
