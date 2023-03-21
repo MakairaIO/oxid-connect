@@ -14,10 +14,15 @@ class oxLang
 
         return [$german, $english];
     }
+    public function setTplLanguage($iLang = null)
+    {}
 }
 
 class oxUtilsView
 {
+    public function parseThroughSmarty($sDesc, $sOxid = null, $oActView = null, $blRecompile = false)
+    {
+    }
 }
 
 class oxBase

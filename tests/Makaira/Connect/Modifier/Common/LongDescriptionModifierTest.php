@@ -6,14 +6,15 @@ namespace Makaira\Connect\Modifier\Common;
 use Makaira\Connect\Type\Common\BaseProduct;
 use Makaira\Connect\DatabaseInterface;
 use Makaira\Connect\Utils\ContentParserInterface;
+use PHPUnit\Framework\TestCase;
 
-class LongDescriptionModifierTest extends \PHPUnit_Framework_TestCase
+class LongDescriptionModifierTest extends TestCase
 {
 
     public function testShortText()
     {
-        $dbMock = $this->getMock(DatabaseInterface::class);
-        $parserMock = $this->getMock(ContentParserInterface::class);
+        $dbMock = $this->createMock(DatabaseInterface::class);
+        $parserMock = $this->createMock(ContentParserInterface::class);
         $parserMock
             ->expects($this->once())
             ->method('parseContent')
@@ -27,8 +28,8 @@ class LongDescriptionModifierTest extends \PHPUnit_Framework_TestCase
 
     public function testShortTextWithHTML()
     {
-        $dbMock = $this->getMock(DatabaseInterface::class);
-        $parserMock = $this->getMock(ContentParserInterface::class);
+        $dbMock = $this->createMock(DatabaseInterface::class);
+        $parserMock = $this->createMock(ContentParserInterface::class);
         $parserMock
             ->expects($this->once())
             ->method('parseContent')
@@ -42,8 +43,8 @@ class LongDescriptionModifierTest extends \PHPUnit_Framework_TestCase
 
     public function testTrimming()
     {
-        $dbMock = $this->getMock(DatabaseInterface::class);
-        $parserMock = $this->getMock(ContentParserInterface::class);
+        $dbMock = $this->createMock(DatabaseInterface::class);
+        $parserMock = $this->createMock(ContentParserInterface::class);
         $parserMock
             ->expects($this->once())
             ->method('parseContent')

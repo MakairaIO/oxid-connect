@@ -3,25 +3,27 @@
 namespace Makaira\Connect\Utils;
 
 
-class OxidSmartyParserTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class OxidSmartyParserTest extends TestCase
 {
 
     public function testLanguageSetting()
     {
-        $langMock = $this->getMock(\oxLang::class, ['setTplLanguage']);
+        $langMock = $this->createMock(\oxLang::class);
         $langMock
             ->expects($this->once())
             ->method('setTplLanguage')
             ->with(4);
-        $utilsViewMock = $this->getMock(\oxUtilsView::class);
+        $utilsViewMock = $this->createMock(\oxUtilsView::class);
         $parser = new OxidSmartyParser($langMock, $utilsViewMock);
         $parser->setTplLang(4);
     }
 
     public function testParsing()
     {
-        $langMock = $this->getMock(\oxLang::class);
-        $utilsViewMock = $this->getMock(\oxUtilsView::class, ['parseThroughSmarty']);
+        $langMock = $this->createMock(\oxLang::class);
+        $utilsViewMock = $this->createMock(\oxUtilsView::class);
         $utilsViewMock
             ->expects($this->once())
             ->method('parseThroughSmarty')

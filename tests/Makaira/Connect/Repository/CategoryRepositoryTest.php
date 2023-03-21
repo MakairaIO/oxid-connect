@@ -11,8 +11,8 @@ class CategoryRepositoryTest extends UnitTestCase
 {
     public function testLoadCategory()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
+        $databaseMock = $this->createMock(DatabaseInterface::class);
+        $modifiersMock = $this->createMock(ModifierList::class);
 
         $repository = new CategoryRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
 
@@ -44,8 +44,8 @@ class CategoryRepositoryTest extends UnitTestCase
 
     public function testSetDeletedMarker()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
+        $databaseMock = $this->createMock(DatabaseInterface::class);
+        $modifiersMock = $this->createMock(ModifierList::class);
 
         $repository = new CategoryRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
 
@@ -73,8 +73,8 @@ class CategoryRepositoryTest extends UnitTestCase
 
     public function testRunModifierLoadCategory()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
+        $databaseMock = $this->createMock(DatabaseInterface::class);
+        $modifiersMock = $this->createMock(ModifierList::class);
 
         $repository = new CategoryRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
 
@@ -103,8 +103,8 @@ class CategoryRepositoryTest extends UnitTestCase
 
     public function testGetAllIds()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
+        $databaseMock = $this->createMock(DatabaseInterface::class);
+        $modifiersMock = $this->createMock(ModifierList::class);
 
         $repository = new CategoryRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
 

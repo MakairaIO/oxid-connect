@@ -5,13 +5,14 @@ namespace Makaira\Connect\Modifier\Category;
 use Makaira\Connect\DatabaseInterface;
 use Makaira\Connect\Type\Category\Category;
 use Makaira\Connect\Type\Category\AssignedOxObject;
+use PHPUnit\Framework\TestCase;
 
-class OxObjectModifierTest extends \PHPUnit_Framework_TestCase
+class OxObjectModifierTest extends TestCase
 {
 
     public function testApply()
     {
-        $dbMock = $this->getMock(DatabaseInterface::class);
+        $dbMock = $this->createMock(DatabaseInterface::class);
         $dbResult = [
             'oxid' => 'abcdef',
             'oxpos' => 42,
@@ -25,6 +26,6 @@ class OxObjectModifierTest extends \PHPUnit_Framework_TestCase
 
         $category = $modifier->apply(new Category(['id' => 'ghijkl']));
 
-        $this->assertArraySubset([new AssignedOxObject($dbResult)], $category->oxobject);
+        $this->assertEquals([new AssignedOxObject($dbResult)], $category->oxobject);
     }
 }

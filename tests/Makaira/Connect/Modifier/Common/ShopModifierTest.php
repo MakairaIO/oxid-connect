@@ -5,12 +5,13 @@ namespace Makaira\Connect\Modifier\Common;
 use Makaira\Connect\DatabaseInterface;
 use Makaira\Connect\Type\Common\BaseProduct;
 use Makaira\Connect\Type\Product\Product;
+use PHPUnit\Framework\TestCase;
 
-class ShopModifierTest extends \PHPUnit_Framework_TestCase
+class ShopModifierTest extends TestCase
 {
     public function testCEPE()
     {
-        $dbMock = $this->getMock(DatabaseInterface::class);
+        $dbMock = $this->createMock(DatabaseInterface::class);
         $dbMock
             ->expects($this->never())
             ->method('query');
@@ -23,7 +24,7 @@ class ShopModifierTest extends \PHPUnit_Framework_TestCase
 
     public function testEE()
     {
-        $dbMock = $this->getMock(DatabaseInterface::class);
+        $dbMock = $this->createMock(DatabaseInterface::class);
         $dbMock
             ->expects($this->once())
             ->method('query')
@@ -38,7 +39,7 @@ class ShopModifierTest extends \PHPUnit_Framework_TestCase
 
     public function testLegacyEE()
     {
-        $dbMock = $this->getMock(DatabaseInterface::class);
+        $dbMock = $this->createMock(DatabaseInterface::class);
         $product = new Product();
         $product->OXSHOPINCL = 3;
         $modifier = new ShopModifier($dbMock, true, 'oxarticles2shop');

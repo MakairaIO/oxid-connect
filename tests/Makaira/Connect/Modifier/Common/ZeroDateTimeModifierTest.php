@@ -3,8 +3,9 @@
 namespace Makaira\Connect\Modifier\Common;
 
 use Makaira\Connect\Type;
+use PHPUnit\Framework\TestCase;
 
-class ZeroDateTimeModifierTest extends \PHPUnit_Framework_TestCase
+class ZeroDateTimeModifierTest extends TestCase
 {
     public function testValidDateTime()
     {
