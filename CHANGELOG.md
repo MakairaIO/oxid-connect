@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/MakairaIO/oxid-connect/compare/2.11.2...3.0.0) (2023-03-21)
+
+
+### Features
+
+* Update dependencies for OXID 6.4 ([#43](https://github.com/MakairaIO/oxid-connect/issues/43)) ([0b8b993](https://github.com/MakairaIO/oxid-connect/commit/0b8b993982715ff3b90500caea627005e8b401f3))
+
+
+### BREAKING CHANGES
+
+* New dependencies are not backwards compatible
+
 ## [2.11.2](https://github.com/MakairaIO/oxid-connect/compare/2.11.1...2.11.2) (2022-09-21)
 
 
