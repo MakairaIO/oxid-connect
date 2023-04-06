@@ -14,7 +14,13 @@
     "oxid-esales/oxideshop-metapackage-ce": "^6.5"
   },
   "autoload": {
-    "classmap": ["src/"],
+    "classmap": [
+      "src/oxid/core/makaira_connect_events.php",
+      "src/oxid/core/makaira_connect_helper.php",
+      "src/oxid/core/makaira_connect_request_handler.php",
+      "src/oxid/core/makaira_cookie_utils.php",
+      "src/oxid/core/makaira_tracking_data_generator.php"
+    ],
     "psr-4": {
         "Makaira\\Connect\\": ["src/Makaira/Connect"]
     }
