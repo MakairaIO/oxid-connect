@@ -1,3 +1,10 @@
+## [4.0.2](https://github.com/MakairaIO/oxid-connect/compare/4.0.1...4.0.2) (2023-04-06)
+
+
+### Bug Fixes
+
+* Add support for non-standard server ports ([#45](https://github.com/MakairaIO/oxid-connect/issues/45)) ([0cc82b4](https://github.com/MakairaIO/oxid-connect/commit/0cc82b44489449a1d75f788cd8b064ba4b2e165c))
+
 ## [4.0.1](https://github.com/MakairaIO/oxid-connect/compare/4.0.0...4.0.1) (2023-04-06)
 
 
