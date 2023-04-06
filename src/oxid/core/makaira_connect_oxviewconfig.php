@@ -323,7 +323,16 @@ class makaira_connect_oxviewconfig extends makaira_connect_oxviewconfig_parent
             $query = '?' . $query;
         }
 
-        $this->generatedFilterUrl[ $baseUrl ] = "{$parsedUrl['scheme']}://{$parsedUrl['host']}{$path}{$query}";
+        $isCustomPort = true;
+        if ('http' === $parsedUrl['scheme'] && 80 === $parsedUrl['port']) {
+            $isCustomPort = false;
+        }
+        if ('https' === $parsedUrl['scheme'] && 443 === $parsedUrl['port']) {
+            $isCustomPort = false;
+        }
+        $port = $isCustomPort ? ":{$parsedUrl['port']}" : '';
+
+        $this->generatedFilterUrl[ $baseUrl ] = "{$parsedUrl['scheme']}://{$parsedUrl['host']}{$port}{$path}{$query}";
 
         return $this->generatedFilterUrl[ $baseUrl ];
     }
