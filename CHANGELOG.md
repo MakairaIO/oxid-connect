@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/MakairaIO/oxid-connect/compare/4.0.0...4.0.1) (2023-04-06)
+
+
+### Bug Fixes
+
+* **Autoloader:** Remove extending classes from autoloader ([04c7907](https://github.com/MakairaIO/oxid-connect/commit/04c7907c4b580c2a58532e4784f3bafdeb1db1cc))
+
 # [4.0.0](https://github.com/MakairaIO/oxid-connect/compare/3.0.0...4.0.0) (2023-03-21)
 
 
