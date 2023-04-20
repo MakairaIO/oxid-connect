@@ -394,9 +394,11 @@ class Autosuggester
      */
     public function afterSearchRequest(&$result)
     {
+        $event = new AutoSuggesterResponseEvent($result);
         $this->dispatcher->dispatch(
             AutoSuggesterResponseEvent::NAME,
-            new AutoSuggesterResponseEvent($result)
+            $event
         );
+        $result = (array)$event->getResult();
     }
 }

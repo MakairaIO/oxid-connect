@@ -81,18 +81,20 @@ class ApiEventTest extends IntegrationTest
         $event = $container->get(EventDispatcherInterface::class);
         $autosuggester = $container->get(Autosuggester::class);
 
-        $result = new Result(['count' => 33]);
+        $result = ['count' => 33];
 
         //Act
         $event->addListener(AutoSuggesterResponseEvent::NAME, [$this, 'listenerResponseAutoSuggester']);
         $autosuggester->afterSearchRequest($result);
 
         //Assert
-        $this->assertEquals(66, $result->count);
+        $this->assertEquals(66, $result['count']);
     }
 
     public function listenerResponseAutoSuggester(AutoSuggesterResponseEvent $event) {
-        $event->getResult()->count = 66;
+        $result = $event->getResult();
+        $this->assertInstanceOf(\ArrayObject::class, $result);
+        $result['count'] = 66;
     }
 
     public function listenerModifierQueryRequest(ModifierQueryRequestEvent $event) {

@@ -16,13 +16,13 @@ class AutoSuggesterResponseEvent extends Event
 
     private $result;
 
-    public function __construct(Result &$result)
+    public function __construct($result)
     {
-        $this->result = $result;
+        $this->result = new \ArrayObject($result);
     }
 
     /**
-     * @return Result
+     * @return \ArrayObject
      */
     public function getResult()
     {
