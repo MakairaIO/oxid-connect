@@ -143,8 +143,10 @@ class SearchHandler extends AbstractHandler
         }
         $data['count'] = count($data['items']);
 
-        foreach ($data['aggregations'] as $key => $item) {
-            $data['aggregations'][ $key ] = new Aggregation($item);
+        if (isset($data['aggregations'])) {
+            foreach ($data['aggregations'] as $key => $item) {
+                $data['aggregations'][ $key ] = new Aggregation($item);
+            }
         }
 
         return new Result($data);

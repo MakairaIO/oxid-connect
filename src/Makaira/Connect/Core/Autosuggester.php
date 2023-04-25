@@ -167,7 +167,7 @@ class Autosuggester
 
         // get category results
         $aCategories = [];
-        if ($result['category']) {
+        if (is_object($result['category'])) {
             foreach ($result['category']->items as $document) {
                 $aCategories[] = $this->prepareCategoryItem($document);
             }
@@ -177,7 +177,7 @@ class Autosuggester
 
         // get manufacturer results
         $aManufacturers = [];
-        if ($result['manufacturer']) {
+        if (is_object($result['manufacturer'])) {
             foreach ($result['manufacturer']->items as $document) {
                 $aManufacturers[] = $this->prepareManufacturerItem($document);
             }
@@ -187,7 +187,7 @@ class Autosuggester
 
         // get searchable links results
         $aLinks = [];
-        if ($result['links']) {
+        if (is_object($result['links'])) {
             foreach ($result['links']->items as $document) {
                 $aLinks[] = $this->prepareLinkItem($document);
             }
@@ -197,7 +197,7 @@ class Autosuggester
 
         // get suggestion results
         $aSuggestions = [];
-        if ($result['suggestion']) {
+        if (is_object($result['suggestion'])) {
             foreach ($result['suggestion']->items as $document) {
                 $aSuggestions[] = $this->prepareSuggestionItem($document);
             }
