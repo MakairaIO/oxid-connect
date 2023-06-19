@@ -9,46 +9,42 @@ use PHPUnit\Framework\TestCase;
 
 class CategoryModifierTest extends TestCase
 {
-    public function testUnnested()
+    public function testUnnested(): void
     {
+        $queryCb = static function (...$args) {
+            if ('abc' === ($args[1]['productId'] ?? '') && $args[1]['productActive'] ?? false) {
+                return [
+                    [
+                        'catid'  => 'def',
+                        'title'  => 'mysubcat',
+                        'oxpos'  => 1,
+                        'shopid' => 1,
+                        'active' => 1,
+                        'oxleft' => 5,
+                        'oxright' => 7,
+                        'oxrootid' => 42,
+                    ],
+                ];
+            }
+
+            if (5 === ($args[1]['left'] ?? 0) && 7 === ($args[1]['right'] ?? 0) && 42 === ($args[1]['rootId'] ?? 0)) {
+                return [
+                    [
+                        'title'  => 'mytitle',
+                        'active'  => 1
+                    ],
+                ];
+            }
+
+            return [];
+        };
         $dbMock = $this->createMock(DatabaseInterface::class);
         $dbMock
-            ->expects($this->at(0))
             ->method('query')
-            ->with($this->anything(), ['productId' => 'abc', 'productActive' => 1])
-            ->will(
-                $this->returnValue(
-                    [
-                        [
-                            'catid'  => 'def',
-                            'title'  => 'mysubcat',
-                            'oxpos'  => 1,
-                            'shopid' => 1,
-                            'active' => 1,
-                            'oxleft' => 5,
-                            'oxright' => 7,
-                            'oxrootid' => 42,
-                        ],
-                    ]
-                )
-            );
-        $dbMock
-            ->expects($this->at(1))
-            ->method('query')
-            ->with($this->anything(), ['left' => 5, 'right' => 7, 'rootId' => 42])
-            ->will(
-                $this->returnValue(
-                    [
-                        [
-                            'title'  => 'mytitle',
-                            'active'  => 1
-                        ],
-                    ]
-                )
-            );
+            ->willReturnCallback($queryCb);
 
-        $product = new Product();
-        $product->id = 'abc';
+        $product           = new Product();
+        $product->id       = 'abc';
         $product->OXACTIVE = 1;
 
         $modifier = new CategoryModifier($dbMock);
@@ -66,7 +62,8 @@ class CategoryModifierTest extends TestCase
                         'title' => 'mysubcat'
                     ]
                 ),
-            ], $product->category
+            ],
+            $product->category
         );
     }
 }
