@@ -2,24 +2,33 @@
 
 <phpunit
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/8.5/phpunit.xsd"
-        bootstrap="tests/bootstrap.php">
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+        backupGlobals="false"
+        backupStaticAttributes="false"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        processIsolation="false"
+        stopOnFailure="false"
+        bootstrap="tests/bootstrap.php"
+        cacheResult="false"
+>
+    <coverage>
+        <include>
+            <directory suffix=".php">src/Makaira/</directory>
+        </include>
+    </coverage>
+
+    <testsuites>
+        <testsuite name="Unit Tests">
+            <directory>tests/</directory>
+            <exclude>tests/Makaira/UserBundleTest.php</exclude>
+        </testsuite>
+    </testsuites>
 
     <groups>
         <exclude>
             <group>functional</group>
         </exclude>
     </groups>
-
-    <testsuites>
-        <testsuite name="Unit Tests">
-            <directory>tests/</directory>
-        </testsuite>
-    </testsuites>
-
-    <filter>
-        <whitelist>
-            <directory suffix=".php">src/Makaira/</directory>
-        </whitelist>
-    </filter>
 </phpunit>

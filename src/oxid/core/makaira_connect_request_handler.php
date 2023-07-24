@@ -289,7 +289,7 @@ class makaira_connect_request_handler
      *
      * @return oxArticleList|oxarticlelist
      */
-    public function loadProducts(array $productIds = [], Result $productResult)
+    public function loadProducts(array $productIds = [])
     {
         /** @var oxArticleList $oxArticleList */
         $oxArticleList = oxNew('oxarticlelist');

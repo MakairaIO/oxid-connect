@@ -4,3 +4,4 @@
 out/node_modules/
 node_modules/
 /.phpunit.result.cache
+/composer.lock
