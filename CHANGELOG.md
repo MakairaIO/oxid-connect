@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/MakairaIO/oxid-connect/compare/4.0.2...4.1.0) (2023-07-24)
+
+
+### Features
+
+* **Tests:** Enable tests for PHP 8.0 and PHP 8.1 ([#51](https://github.com/MakairaIO/oxid-connect/issues/51)) ([e4b3f96](https://github.com/MakairaIO/oxid-connect/commit/e4b3f96e43ac113f28e6df5e61ca5bd4df2ddfc2))
+
 ## [4.0.2](https://github.com/MakairaIO/oxid-connect/compare/4.0.1...4.0.2) (2023-04-06)
 
 
