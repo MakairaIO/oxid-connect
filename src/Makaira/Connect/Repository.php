@@ -52,7 +52,7 @@ class Repository
     /**
      * @var string
      */
-    protected string $touchQuery = '
+    protected $touchQuery = '
         REPLACE INTO
           makaira_connect_changes
         (OXID, TYPE, CHANGED)

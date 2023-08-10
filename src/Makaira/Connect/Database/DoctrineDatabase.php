@@ -23,15 +23,15 @@ class DoctrineDatabase implements DatabaseInterface
     /**
      * @var Connection
      */
-    private Connection $database;
+    private $database;
 
     /**
      * @var Statement[]
      */
-    private array $preparedStatements = [];
+    private $preparedStatements = [];
 
     /** @var  TableTranslator */
-    private TableTranslator $translator;
+    private $translator;
 
     public function __construct(Connection $database, TableTranslator $translator)
     {
@@ -123,7 +123,7 @@ class DoctrineDatabase implements DatabaseInterface
         return $statement->executeQuery()->fetchFirstColumn();
     }
 
-    protected function bindQueryParameters(DriverStatement $statement, array $parameters): void
+    protected function bindQueryParameters(DriverStatement $statement, array $parameters)
     {
         foreach ($parameters as $key => $value) {
             switch (gettype($value)) {
@@ -178,7 +178,7 @@ class DoctrineDatabase implements DatabaseInterface
         return $this->preparedStatements[$cacheKey];
     }
 
-    public function beginTransaction(): void
+    public function beginTransaction()
     {
         $this->database->beginTransaction();
     }
@@ -187,7 +187,7 @@ class DoctrineDatabase implements DatabaseInterface
      * @return void
      * @throws ConnectionException
      */
-    public function commit(): void
+    public function commit()
     {
         $this->database->commit();
     }
@@ -197,7 +197,7 @@ class DoctrineDatabase implements DatabaseInterface
      * @throws ConnectionException
      */
 
-    public function rollback(): void
+    public function rollback()
     {
         $this->database->rollBack();
     }

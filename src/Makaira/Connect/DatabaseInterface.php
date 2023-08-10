@@ -34,11 +34,11 @@ interface DatabaseInterface
      */
     public function execute(string $query, array $parameters = array()): int;
 
-    public function beginTransaction(): void;
+    public function beginTransaction();
 
-    public function commit(): void;
+    public function commit();
 
-    public function rollback(): void;
+    public function rollback();
 
     /**
      * Query database and retrieve column

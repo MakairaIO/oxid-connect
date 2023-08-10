@@ -7,12 +7,10 @@ use PHPUnit\Framework\TestCase;
 
 class UnitTestCase extends TestCase
 {
-    protected function getTableTranslatorMock()
+    protected function getTableTranslator(): TableTranslator
     {
-        return $this->getMock(
-            TableTranslator::class,
-            ['translate'],
-            [['oxarticles', 'oxartextends', 'oxattribute', 'oxcategories', 'oxmanufacturers', 'oxobject2attribute']]
+        return new TableTranslator(
+            ['oxarticles', 'oxartextends', 'oxattribute', 'oxcategories', 'oxmanufacturers', 'oxobject2attribute']
         );
     }
 }

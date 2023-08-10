@@ -154,7 +154,7 @@ class RepositoryTest extends UnitTestCase
 
     public function testTouchExecutesQuery()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
+        $databaseMock = $this->createMock(DatabaseInterface::class);
         $repository = new Repository($databaseMock, new EventDispatcher(), false);
 
         $databaseMock
@@ -166,7 +166,7 @@ class RepositoryTest extends UnitTestCase
 
     public function testTouchAllOneRepository()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
+        $databaseMock = $this->createMock(DatabaseInterface::class);
         $databaseMock
             ->expects($this->exactly(4))
             ->method('execute')
@@ -182,7 +182,7 @@ class RepositoryTest extends UnitTestCase
             [
                 $databaseMock,
                 $this->getMock(ModifierList::class, [], [], '', false),
-                $this->getTableTranslatorMock()
+                $this->getTableTranslator()
             ]
         );
         $repositoryMock1
@@ -215,7 +215,7 @@ class RepositoryTest extends UnitTestCase
             $this->getMock(
                 AbstractRepository::class,
                 [],
-                [$databaseMock, $this->getMock(ModifierList::class, [], [], '', false), $this->getTableTranslatorMock()]
+                [$databaseMock, $this->getMock(ModifierList::class, [], [], '', false), $this->getTableTranslator()]
             );
         $repositoryMock1
             ->expects($this->once())
@@ -229,7 +229,7 @@ class RepositoryTest extends UnitTestCase
             $this->getMock(
                 AbstractRepository::class,
                 [],
-                [$databaseMock, $this->getMock(ModifierList::class, [], [], '', false), $this->getTableTranslatorMock()]
+                [$databaseMock, $this->getMock(ModifierList::class, [], [], '', false), $this->getTableTranslator()]
             );
         $repositoryMock2
             ->expects($this->once())

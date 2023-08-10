@@ -14,7 +14,7 @@ class ProductRepositoryTest extends UnitTestCase
         $databaseMock = $this->getMock(DatabaseInterface::class);
         $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
 
-        $repository = new ProductRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
+        $repository = new ProductRepository($databaseMock, $modifiersMock, $this->getTableTranslator());
 
         $databaseMock
             ->expects($this->once())
@@ -43,7 +43,7 @@ class ProductRepositoryTest extends UnitTestCase
         $databaseMock = $this->getMock(DatabaseInterface::class);
         $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
 
-        $repository = new ProductRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
+        $repository = new ProductRepository($databaseMock, $modifiersMock, $this->getTableTranslator());
 
         $databaseMock
             ->expects($this->once())
@@ -70,7 +70,7 @@ class ProductRepositoryTest extends UnitTestCase
         $databaseMock = $this->getMock(DatabaseInterface::class);
         $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
 
-        $repository = new ProductRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
+        $repository = new ProductRepository($databaseMock, $modifiersMock, $this->getTableTranslator());
 
         $databaseMock
             ->expects($this->once())
@@ -98,7 +98,7 @@ class ProductRepositoryTest extends UnitTestCase
         $databaseMock = $this->getMock(DatabaseInterface::class);
         $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
 
-        $repository = new ProductRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
+        $repository = new ProductRepository($databaseMock, $modifiersMock, $this->getTableTranslator());
 
         $databaseMock
             ->expects($this->once())
