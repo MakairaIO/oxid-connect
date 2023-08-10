@@ -7,6 +7,7 @@ use Makaira\Connect\Exception as ConnectException;
 use Makaira\Connect\Exceptions\OutOfBoundsException;
 use Makaira\Connect\Repository\AbstractRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Throwable;
 
 /**
  * Class Repository
@@ -51,7 +52,7 @@ class Repository
     /**
      * @var string
      */
-    protected $touchQuery = '
+    protected string $touchQuery = '
         REPLACE INTO
           makaira_connect_changes
         (OXID, TYPE, CHANGED)
@@ -323,13 +324,22 @@ class Repository
      *
      * @param string $type
      * @param string $id
+     *
+     * @throws Throwable
      */
     public function touch($type, $id)
     {
         if (!$id) {
             return;
         }
-        $this->database->execute($this->touchQuery, ['type' => $type, 'id' => $id]);
+
+        try {
+            $this->database->beginTransaction();
+            $this->database->execute($this->touchQuery, ['type' => $type, 'id' => $id]);
+        } catch (Throwable $e) {
+            $this->database->rollBack();
+            throw $e;
+        }
     }
 
     /**
