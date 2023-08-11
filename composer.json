@@ -2,7 +2,7 @@
   "name": "makaira/oxid-connect",
   "type": "oxideshop-module",
   "require-dev": {
-    "phpunit/phpunit": "^4.0",
+    "phpunit/phpunit": "^5.7",
     "pdepend/pdepend": "@stable",
     "phpmd/phpmd": "@stable",
     "doctrine/dbal": "^2",

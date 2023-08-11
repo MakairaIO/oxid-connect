@@ -20,7 +20,7 @@ interface DatabaseInterface
      *
      * @return array
      */
-    public function query($query, array $parameters = array());
+    public function query(string $query, array $parameters = array()): array;
 
     /**
      * Execute query without return value
@@ -32,7 +32,13 @@ interface DatabaseInterface
      * @param array $parameters
      * @return void
      */
-    public function execute($query, array $parameters = array());
+    public function execute(string $query, array $parameters = array()): int;
+
+    public function beginTransaction();
+
+    public function commit();
+
+    public function rollback();
 
     /**
      * Query database and retrieve column
@@ -42,5 +48,5 @@ interface DatabaseInterface
      *
      * @return array
      */
-    public function getColumn($query, array $parameters = []);
+    public function getColumn(string $query, array $parameters = []): array;
 }

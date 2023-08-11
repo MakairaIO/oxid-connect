@@ -14,7 +14,7 @@ class ManufacturerRepositoryTest extends UnitTestCase
         $databaseMock = $this->getMock(DatabaseInterface::class);
         $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
 
-        $repository = new ManufacturerRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
+        $repository = new ManufacturerRepository($databaseMock, $modifiersMock, $this->getTableTranslator());
 
         $databaseMock
             ->expects($this->once())
@@ -47,7 +47,7 @@ class ManufacturerRepositoryTest extends UnitTestCase
         $databaseMock = $this->getMock(DatabaseInterface::class);
         $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
 
-        $repository = new ManufacturerRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
+        $repository = new ManufacturerRepository($databaseMock, $modifiersMock, $this->getTableTranslator());
 
         $databaseMock
             ->expects($this->once())
@@ -76,7 +76,7 @@ class ManufacturerRepositoryTest extends UnitTestCase
         $databaseMock = $this->getMock(DatabaseInterface::class);
         $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
 
-        $repository = new ManufacturerRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
+        $repository = new ManufacturerRepository($databaseMock, $modifiersMock, $this->getTableTranslator());
 
         $databaseMock
             ->expects($this->once())
@@ -106,7 +106,7 @@ class ManufacturerRepositoryTest extends UnitTestCase
         $databaseMock = $this->getMock(DatabaseInterface::class);
         $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
 
-        $repository = new ManufacturerRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
+        $repository = new ManufacturerRepository($databaseMock, $modifiersMock, $this->getTableTranslator());
 
         $databaseMock
             ->expects($this->once())

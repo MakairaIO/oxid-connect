@@ -11,10 +11,10 @@ class CategoryRepositoryTest extends UnitTestCase
 {
     public function testLoadCategory()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
+        $databaseMock  = $this->createMock(DatabaseInterface::class);
+        $modifiersMock = $this->createMock(ModifierList::class);
 
-        $repository = new CategoryRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
+        $repository = new CategoryRepository($databaseMock, $modifiersMock, $this->getTableTranslator());
 
         $databaseMock
             ->expects($this->once())
@@ -28,15 +28,15 @@ class CategoryRepositoryTest extends UnitTestCase
         $change = $repository->get(42);
         $this->assertEquals(
             new Change(
-                array(
-                    'id' => 42,
+                [
+                    'id'   => 42,
                     'type' => 'category',
                     'data' => new Category(
-                        array(
+                        [
                             'id' => 42,
-                        )
+                        ]
                     ),
-                )
+                ]
             ),
             $change
         );
@@ -44,10 +44,10 @@ class CategoryRepositoryTest extends UnitTestCase
 
     public function testSetDeletedMarker()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
+        $databaseMock  = $this->createMock(DatabaseInterface::class);
+        $modifiersMock = $this->createMock(ModifierList::class);
 
-        $repository = new CategoryRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
+        $repository = new CategoryRepository($databaseMock, $modifiersMock, $this->getTableTranslator());
 
         $databaseMock
             ->expects($this->once())
@@ -61,11 +61,11 @@ class CategoryRepositoryTest extends UnitTestCase
         $change = $repository->get(42);
         $this->assertEquals(
             new Change(
-                array(
-                    'id' => 42,
-                    'type' => 'category',
+                [
+                    'id'      => 42,
+                    'type'    => 'category',
                     'deleted' => true,
-                )
+                ]
             ),
             $change
         );
@@ -73,10 +73,10 @@ class CategoryRepositoryTest extends UnitTestCase
 
     public function testRunModifierLoadCategory()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
+        $databaseMock  = $this->createMock(DatabaseInterface::class);
+        $modifiersMock = $this->createMock(ModifierList::class);
 
-        $repository = new CategoryRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
+        $repository = new CategoryRepository($databaseMock, $modifiersMock, $this->getTableTranslator());
 
         $databaseMock
             ->expects($this->once())
@@ -91,11 +91,11 @@ class CategoryRepositoryTest extends UnitTestCase
         $change = $repository->get(42);
         $this->assertEquals(
             new Change(
-                array(
-                    'id' => 42,
+                [
+                    'id'   => 42,
                     'type' => 'category',
                     'data' => 'modified',
-                )
+                ]
             ),
             $change
         );
@@ -103,10 +103,10 @@ class CategoryRepositoryTest extends UnitTestCase
 
     public function testGetAllIds()
     {
-        $databaseMock = $this->getMock(DatabaseInterface::class);
-        $modifiersMock = $this->getMock(ModifierList::class, [], [], '', false);
+        $databaseMock = $this->createMock(DatabaseInterface::class);
+        $modifiersMock = $this->createMock(ModifierList::class);
 
-        $repository = new CategoryRepository($databaseMock, $modifiersMock, $this->getTableTranslatorMock());
+        $repository = new CategoryRepository($databaseMock, $modifiersMock, $this->getTableTranslator());
 
         $databaseMock
             ->expects($this->once())

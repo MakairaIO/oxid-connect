@@ -3,10 +3,15 @@
 namespace Makaira\Connect\Database;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\ConnectionException;
+use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Driver\Statement as DriverStatement;
+use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\DBAL\Statement;
 use Makaira\Connect\DatabaseInterface;
 use Makaira\Connect\Utils\TableTranslator;
 use PDO;
+use PDOStatement;
 
 /**
  * Simple database facade so we do not need to set fetch mode before each query
@@ -41,24 +46,20 @@ class DoctrineDatabase implements DatabaseInterface
      *
      * @param string $query
      * @param array  $parameters
+     * @param bool   $translateTables
      *
      * @return void
+     * @throws DBALException
+     * @throws Exception
      */
-    public function execute($query, array $parameters = array(), $translateTables = true)
+    public function execute(string $query, array $parameters = array(), bool $translateTables = true): int
     {
-        if ($translateTables) {
-            $query = $this->translator->translate($query);
-        }
-        $cacheKey = md5($query);
-        if (!isset($this->preparedStatements[$cacheKey])) {
-            $this->preparedStatements[$cacheKey] = $this->database->prepare($query);
-        }
-        $statement = $this->preparedStatements[$cacheKey];
-        $statement = $this->bindQueryParameters($statement, $parameters);
+        $query = $this->translatesTables($translateTables, $query);
 
-        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $statement = $this->prepareStatement($query);
+        $this->bindQueryParameters($statement, $parameters);
 
-        $statement->execute();
+        $statement->executeStatement();
     }
 
     /**
@@ -68,39 +69,37 @@ class DoctrineDatabase implements DatabaseInterface
      *
      * @param string $query
      * @param array  $parameters
+     * @param bool   $translateTables
      *
      * @return array
+     * @throws DBALException
+     * @throws Exception
      */
-    public function query($query, array $parameters = array(), $translateTables = true)
+    public function query(string $query, array $parameters = array(), bool $translateTables = true): array
     {
-        if ($translateTables) {
-            $query = $this->translator->translate($query);
-        }
-        $cacheKey = md5($query);
-        if (!isset($this->preparedStatements[$cacheKey])) {
-            $this->preparedStatements[$cacheKey] = $this->database->prepare($query);
-        }
-        $statement = $this->preparedStatements[$cacheKey];
-        $statement = $this->bindQueryParameters($statement, $parameters);
+        $query     = $this->translatesTables($translateTables, $query);
+        $statement = $this->prepareStatement($query);
+        $this->bindQueryParameters($statement, $parameters);
 
-        $statement->execute();
-        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $resultSet = $statement->executeQuery();
+        $result = $resultSet->fetchAllAssociative();
+        $wrappedStatement = $statement->getWrappedStatement();
+        if ($wrappedStatement instanceof PDOStatement) {
+            foreach ($result as $nr => $row) {
+                $column = 0;
+                foreach ($row as $key => $field) {
+                    $meta = $wrappedStatement->getColumnMeta($column++);
 
-        $result = $statement->fetchAll();
-        foreach ($result as $nr => $row) {
-            $column = 0;
-            foreach ($row as $key => $field) {
-                $meta = $statement->getWrappedStatement()->getColumnMeta($column++);
-
-                switch ($meta['native_type']) {
-                    case 'TINY':
-                    case 'LONG':
-                    case 'LONGLONG':
-                        $result[$nr][$key] = (int) $field;
-                        break;
-                    case 'DOUBLE':
-                        $result[$nr][$key] = (float) $field;
-                        break;
+                    switch ($meta['native_type']) {
+                        case 'TINY':
+                        case 'LONG':
+                        case 'LONGLONG':
+                            $result[$nr][$key] = (int) $field;
+                            break;
+                        case 'DOUBLE':
+                            $result[$nr][$key] = (float) $field;
+                            break;
+                    }
                 }
             }
         }
@@ -108,17 +107,23 @@ class DoctrineDatabase implements DatabaseInterface
         return $result;
     }
 
-    public function getColumn($query, array $parameters = [])
+    /**
+     * @param string $query
+     * @param array  $parameters
+     *
+     * @return array
+     * @throws DBALException
+     * @throws Exception
+     */
+    public function getColumn(string $query, array $parameters = []): array
     {
         $statement = $this->database->prepare($query);
-        $statement = $this->bindQueryParameters($statement, $parameters);
+        $this->bindQueryParameters($statement, $parameters);
 
-        $statement->execute();
-
-        return $statement->fetchAll(PDO::FETCH_COLUMN);
+        return $statement->executeQuery()->fetchFirstColumn();
     }
 
-    protected function bindQueryParameters(Statement $statement, array $parameters)
+    protected function bindQueryParameters(DriverStatement $statement, array $parameters)
     {
         foreach ($parameters as $key => $value) {
             switch (gettype($value)) {
@@ -136,12 +141,64 @@ class DoctrineDatabase implements DatabaseInterface
                     break;
             }
         }
-
-        return $statement;
     }
 
     public function quote($value)
     {
         return $this->database->quote($value);
+    }
+
+    /**
+     * @param bool   $translateTables
+     * @param string $query
+     *
+     * @return string
+     */
+    private function translatesTables(bool $translateTables, string $query): string
+    {
+        if ($translateTables) {
+            $query = $this->translator->translate($query);
+        }
+        return $query;
+    }
+
+    /**
+     * @param string $query
+     *
+     * @return Statement
+     * @throws DBALException
+     */
+    private function prepareStatement(string $query): Statement
+    {
+        $cacheKey = md5($query);
+        if (!isset($this->preparedStatements[$cacheKey])) {
+            $this->preparedStatements[$cacheKey] = $this->database->prepare($query);
+        }
+
+        return $this->preparedStatements[$cacheKey];
+    }
+
+    public function beginTransaction()
+    {
+        $this->database->beginTransaction();
+    }
+
+    /**
+     * @return void
+     * @throws ConnectionException
+     */
+    public function commit()
+    {
+        $this->database->commit();
+    }
+
+    /**
+     * @return void
+     * @throws ConnectionException
+     */
+
+    public function rollback()
+    {
+        $this->database->rollBack();
     }
 }
