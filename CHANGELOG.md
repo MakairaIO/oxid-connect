@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/MakairaIO/oxid-connect/compare/4.1.0...4.2.0) (2023-08-11)
+
+
+### Features
+
+* Add transaction to revision update ([#52](https://github.com/MakairaIO/oxid-connect/issues/52)) ([d5b0fcd](https://github.com/MakairaIO/oxid-connect/commit/d5b0fcdd9cd1155a17725b8355703b0fab9d7714))
+
 # [4.1.0](https://github.com/MakairaIO/oxid-connect/compare/4.0.2...4.1.0) (2023-07-24)
 
 
