@@ -336,6 +336,7 @@ class Repository
         try {
             $this->database->beginTransaction();
             $this->database->execute($this->touchQuery, ['type' => $type, 'id' => $id]);
+            $this->database->commit();
         } catch (Throwable $e) {
             $this->database->rollBack();
             throw $e;
