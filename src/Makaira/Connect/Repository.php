@@ -3,7 +3,6 @@
 namespace Makaira\Connect;
 
 use Makaira\Import\Changes;
-use Makaira\Connect\Exception as ConnectException;
 use Makaira\Connect\Exceptions\OutOfBoundsException;
 use Makaira\Connect\Repository\AbstractRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

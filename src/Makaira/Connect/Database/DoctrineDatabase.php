@@ -4,9 +4,8 @@ namespace Makaira\Connect\Database;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ConnectionException;
-use Doctrine\DBAL\Driver\Exception;
 use Doctrine\DBAL\Driver\Statement as DriverStatement;
-use Doctrine\DBAL\Exception as DBALException;
+use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Statement;
 use Makaira\Connect\DatabaseInterface;
 use Makaira\Connect\Utils\TableTranslator;
@@ -50,7 +49,6 @@ class DoctrineDatabase implements DatabaseInterface
      *
      * @return void
      * @throws DBALException
-     * @throws Exception
      */
     public function execute(string $query, array $parameters = array(), bool $translateTables = true): int
     {
@@ -59,7 +57,7 @@ class DoctrineDatabase implements DatabaseInterface
         $statement = $this->prepareStatement($query);
         $this->bindQueryParameters($statement, $parameters);
 
-        $statement->executeStatement();
+        $statement->execute();
     }
 
     /**
@@ -73,16 +71,15 @@ class DoctrineDatabase implements DatabaseInterface
      *
      * @return array
      * @throws DBALException
-     * @throws Exception
      */
     public function query(string $query, array $parameters = array(), bool $translateTables = true): array
     {
         $query     = $this->translatesTables($translateTables, $query);
         $statement = $this->prepareStatement($query);
         $this->bindQueryParameters($statement, $parameters);
+        $statement->execute();
 
-        $resultSet = $statement->executeQuery();
-        $result = $resultSet->fetchAllAssociative();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         $wrappedStatement = $statement->getWrappedStatement();
         if ($wrappedStatement instanceof PDOStatement) {
             foreach ($result as $nr => $row) {
@@ -113,14 +110,14 @@ class DoctrineDatabase implements DatabaseInterface
      *
      * @return array
      * @throws DBALException
-     * @throws Exception
      */
     public function getColumn(string $query, array $parameters = []): array
     {
         $statement = $this->database->prepare($query);
         $this->bindQueryParameters($statement, $parameters);
+        $statement->execute();
 
-        return $statement->executeQuery()->fetchFirstColumn();
+        return $statement->fetchColumn();
     }
 
     protected function bindQueryParameters(DriverStatement $statement, array $parameters)
