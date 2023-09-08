@@ -1,3 +1,10 @@
+## [2.12.1](https://github.com/MakairaIO/oxid-connect/compare/2.12.0...2.12.1) (2023-09-08)
+
+
+### Bug Fixes
+
+* Rever method calls ([612dda9](https://github.com/MakairaIO/oxid-connect/commit/612dda9e25d1ebb29c803723096a0810f57df4d9))
+
 # [2.12.0](https://github.com/MakairaIO/oxid-connect/compare/2.11.4...2.12.0) (2023-08-11)
 
 
