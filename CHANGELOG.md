@@ -1,3 +1,10 @@
+## [2.12.2](https://github.com/MakairaIO/oxid-connect/compare/2.12.1...2.12.2) (2023-09-26)
+
+
+### Bug Fixes
+
+* Add missing return ([ddfb935](https://github.com/MakairaIO/oxid-connect/commit/ddfb93509aabb51d1f6efb421fbc66bb0f331036))
+
 ## [2.12.1](https://github.com/MakairaIO/oxid-connect/compare/2.12.0...2.12.1) (2023-09-08)
 
 
