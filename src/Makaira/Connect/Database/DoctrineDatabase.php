@@ -47,7 +47,7 @@ class DoctrineDatabase implements DatabaseInterface
      * @param array  $parameters
      * @param bool   $translateTables
      *
-     * @return void
+     * @return int
      * @throws DBALException
      */
     public function execute(string $query, array $parameters = array(), bool $translateTables = true): int
@@ -58,6 +58,8 @@ class DoctrineDatabase implements DatabaseInterface
         $this->bindQueryParameters($statement, $parameters);
 
         $statement->execute();
+
+        return $statement->rowCount();
     }
 
     /**
@@ -140,7 +142,7 @@ class DoctrineDatabase implements DatabaseInterface
         }
     }
 
-    public function quote($value)
+    public function quote($value): string
     {
         return $this->database->quote($value);
     }
