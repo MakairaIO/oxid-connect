@@ -1,3 +1,10 @@
+## [3.1.1](https://github.com/MakairaIO/oxid-connect/compare/3.1.0...3.1.1) (2023-09-26)
+
+
+### Bug Fixes
+
+* Change doctrine calls ([3f58211](https://github.com/MakairaIO/oxid-connect/commit/3f5821115d9b9ab5e3e6b9ae36230f8d270d2474))
+
 # [3.1.0](https://github.com/MakairaIO/oxid-connect/compare/3.0.2...3.1.0) (2023-08-11)
 
 
