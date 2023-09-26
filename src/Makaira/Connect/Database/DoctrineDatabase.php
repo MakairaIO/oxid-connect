@@ -59,7 +59,9 @@ class DoctrineDatabase implements DatabaseInterface
         $statement = $this->prepareStatement($query);
         $this->bindQueryParameters($statement, $parameters);
 
-        $statement->executeStatement();
+        $statement->execute();
+
+        return $statement->rowCount();
     }
 
     /**
@@ -81,8 +83,7 @@ class DoctrineDatabase implements DatabaseInterface
         $statement = $this->prepareStatement($query);
         $this->bindQueryParameters($statement, $parameters);
 
-        $resultSet = $statement->executeQuery();
-        $result = $resultSet->fetchAllAssociative();
+        $result = $statement->fetchAllAssociative();
         $wrappedStatement = $statement->getWrappedStatement();
         if ($wrappedStatement instanceof PDOStatement) {
             foreach ($result as $nr => $row) {
@@ -119,8 +120,9 @@ class DoctrineDatabase implements DatabaseInterface
     {
         $statement = $this->database->prepare($query);
         $this->bindQueryParameters($statement, $parameters);
+        $statement->execute();
 
-        return $statement->executeQuery()->fetchFirstColumn();
+        return $statement->fetchFirstColumn();
     }
 
     protected function bindQueryParameters(DriverStatement $statement, array $parameters): void
