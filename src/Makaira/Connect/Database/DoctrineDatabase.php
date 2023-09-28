@@ -119,7 +119,7 @@ class DoctrineDatabase implements DatabaseInterface
         $this->bindQueryParameters($statement, $parameters);
         $statement->execute();
 
-        return $statement->fetchColumn();
+        return $statement->fetchAll(PDO::FETCH_COLUMN);
     }
 
     protected function bindQueryParameters(DriverStatement $statement, array $parameters)
