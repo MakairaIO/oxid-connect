@@ -1,3 +1,10 @@
+## [2.12.3](https://github.com/MakairaIO/oxid-connect/compare/2.12.2...2.12.3) (2023-09-28)
+
+
+### Bug Fixes
+
+* Replace fetch mathod ([c5bb653](https://github.com/MakairaIO/oxid-connect/commit/c5bb65307d6e466276bcbe1cae03c8751f73d0ac))
+
 ## [2.12.2](https://github.com/MakairaIO/oxid-connect/compare/2.12.1...2.12.2) (2023-09-26)
 
 
