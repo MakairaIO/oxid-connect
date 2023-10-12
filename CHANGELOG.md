@@ -1,3 +1,10 @@
+## [3.1.2](https://github.com/MakairaIO/oxid-connect/compare/3.1.1...3.1.2) (2023-10-12)
+
+
+### Bug Fixes
+
+* Prevent attribute duplication ([39db446](https://github.com/MakairaIO/oxid-connect/commit/39db4466ffe294a246bda451dc72064bd152f667))
+
 ## [3.1.1](https://github.com/MakairaIO/oxid-connect/compare/3.1.0...3.1.1) (2023-09-26)
 
 
