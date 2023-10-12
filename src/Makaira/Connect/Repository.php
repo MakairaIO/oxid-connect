@@ -3,10 +3,11 @@
 namespace Makaira\Connect;
 
 use Makaira\Import\Changes;
-use Makaira\Connect\Exception as ConnectException;
 use Makaira\Connect\Exceptions\OutOfBoundsException;
 use Makaira\Connect\Repository\AbstractRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
+use function array_unique;
 
 /**
  * Class Repository
@@ -219,6 +220,11 @@ class Repository
                         (array) $this->parentAttributes[ $parentId ]['attributeFloat'],
                         $change->data->attributeFloat
                     );
+
+                    $change->data->attributeStr   = array_unique($change->data->attributeStr);
+                    $change->data->attributeInt   = array_unique($change->data->attributeInt);
+                    $change->data->attributeFloat = array_unique($change->data->attributeFloat);
+
                     unset(
                         $change->data->tmpAttributeStr,
                         $change->data->tmpAttributeInt,
