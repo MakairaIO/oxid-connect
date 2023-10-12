@@ -221,9 +221,9 @@ class Repository
                         $change->data->attributeFloat
                     );
 
-                    $change->data->attributeStr   = array_unique($change->data->attributeStr);
-                    $change->data->attributeInt   = array_unique($change->data->attributeInt);
-                    $change->data->attributeFloat = array_unique($change->data->attributeFloat);
+                    $change->data->attributeStr   = array_values(array_unique($change->data->attributeStr));
+                    $change->data->attributeInt   = array_values(array_unique($change->data->attributeInt));
+                    $change->data->attributeFloat = array_values(array_unique($change->data->attributeFloat));
 
                     unset(
                         $change->data->tmpAttributeStr,
