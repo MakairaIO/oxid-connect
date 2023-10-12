@@ -9,6 +9,9 @@ use Makaira\Connect\Repository\AbstractRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Throwable;
 
+use function array_unique;
+use function array_values;
+
 /**
  * Class Repository
  *
@@ -220,6 +223,11 @@ class Repository
                         (array) $this->parentAttributes[ $parentId ]['attributeFloat'],
                         $change->data->attributeFloat
                     );
+
+                    $change->data->attributeStr   = array_values(array_unique($change->data->attributeStr));
+                    $change->data->attributeInt   = array_values(array_unique($change->data->attributeInt));
+                    $change->data->attributeFloat = array_values(array_unique($change->data->attributeFloat));
+
                     unset(
                         $change->data->tmpAttributeStr,
                         $change->data->tmpAttributeInt,
