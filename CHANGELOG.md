@@ -1,3 +1,10 @@
+## [4.2.2](https://github.com/MakairaIO/oxid-connect/compare/4.2.1...4.2.2) (2023-10-18)
+
+
+### Bug Fixes
+
+* Return the number of affected rows ([#55](https://github.com/MakairaIO/oxid-connect/issues/55)) ([14f783e](https://github.com/MakairaIO/oxid-connect/commit/14f783e2e5335e48e3d8947e3a03acd0dbd24f1b))
+
 ## [4.2.1](https://github.com/MakairaIO/oxid-connect/compare/4.2.0...4.2.1) (2023-10-12)
 
 
