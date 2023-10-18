@@ -59,7 +59,7 @@ class DoctrineDatabase implements DatabaseInterface
         $statement = $this->prepareStatement($query);
         $this->bindQueryParameters($statement, $parameters);
 
-        $statement->executeStatement();
+        return $statement->executeStatement();
     }
 
     /**
