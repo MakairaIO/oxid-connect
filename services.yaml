@@ -1,4 +1,3 @@
-
 services:
   # _defaults: ### DO NOT USE _defaults to be compatible with makaira/connect-compat !
   #   autowire: false
@@ -22,8 +21,8 @@ services:
     class: Makaira\Connect\Utils\TableTranslator
     public: true
     arguments:
-      - ['oxarticles', 'oxartextends', 'oxattribute', 'oxcategories', 'oxmanufacturers', 'oxobject2attribute']
-    configurator: ['@Makaira\Connect\Utils\TableTranslatorConfigurator', 'configure']
+      - [ 'oxarticles', 'oxartextends', 'oxattribute', 'oxcategories', 'oxmanufacturers', 'oxobject2attribute' ]
+    configurator: [ '@Makaira\Connect\Utils\TableTranslatorConfigurator', 'configure' ]
 
   # content_parsers.oxid.smarty
   # makaira.content_parser
@@ -37,43 +36,43 @@ services:
   # oxid.language
   makaira.connect.oxid.language:
     class: oxLang
-    factory: ['oxRegistry', 'getLang']
+    factory: [ 'oxRegistry', 'getLang' ]
     public: true
 
   makaira.connect.oxid.article:
     class: oxArticle
     public: true
-    factory: ['oxRegistry', 'get']
-    arguments: ['oxArticle']
+    factory: [ 'oxRegistry', 'get' ]
+    arguments: [ 'oxArticle' ]
 
   makaira.connect.oxid.seo_encoder_category:
     class: oxSeoEncoderCategory
     public: true
-    factory: ['oxRegistry', 'get']
-    arguments: ['oxSeoEncoderCategory']
+    factory: [ 'oxRegistry', 'get' ]
+    arguments: [ 'oxSeoEncoderCategory' ]
 
   makaira.connect.oxid.seo_encoder_manufacturer:
     class: oxSeoEncoderManufacturer
     public: true
-    factory: ['oxRegistry', 'get']
-    arguments: ['oxSeoEncoderManufacturer']
+    factory: [ 'oxRegistry', 'get' ]
+    arguments: [ 'oxSeoEncoderManufacturer' ]
 
   makaira.connect.oxid.seo_encoder_article:
     class: oxSeoEncoderArticle
     public: true
-    factory: ['oxRegistry', 'get']
-    arguments: ['oxSeoEncoderArticle']
+    factory: [ 'oxRegistry', 'get' ]
+    arguments: [ 'oxSeoEncoderArticle' ]
 
   makaira.connect.oxid.utils_view:
     class: oxUtilsView
     public: true
-    factory: ['oxRegistry', 'get']
-    arguments: ['oxUtilsView']
+    factory: [ 'oxRegistry', 'get' ]
+    arguments: [ 'oxUtilsView' ]
 
   makaira.connect.oxid.config:
     class: oxConfig
     public: true
-    factory: ['oxRegistry', 'getConfig']
+    factory: [ 'oxRegistry', 'getConfig' ]
 
   # makaira.connect.http_client
   Makaira\HttpClient\Signing:
@@ -146,26 +145,26 @@ services:
 
   makaira_cookie_utils:
     class: makaira_cookie_utils
-    factory: ['oxRegistry', 'get']
-    arguments: ['makaira_cookie_utils']
+    factory: [ 'oxRegistry', 'get' ]
+    arguments: [ 'makaira_cookie_utils' ]
 
   Makaira\Connect\Command\TouchAllCommand:
     class: Makaira\Connect\Command\TouchAllCommand
     public: true
     tags:
-    - { name: 'console.command' }
+      - { name: 'console.command' }
 
   Makaira\Connect\Command\CleanupCommand:
     class: Makaira\Connect\Command\CleanupCommand
     public: true
     tags:
-    - { name: 'console.command' }
+      - { name: 'console.command' }
 
   Makaira\Connect\Command\DebugChangeCommand:
     class: Makaira\Connect\Command\DebugChangeCommand
     public: true
     tags:
-    - { name: 'console.command' }
+      - { name: 'console.command' }
 
   # makaira.connect.repository
   Makaira\Connect\Repository:
@@ -404,7 +403,7 @@ services:
       $modifiers: '@makaira.connect.repository.product.mofifier_list'
       $tableTranslator: '@Makaira\Connect\Utils\TableTranslator'
     tags:
-    - { name: 'kernel.event_listener', event: 'makaira.connect.repository', priority: 1000, method: 'addRepository' }
+      - { name: 'kernel.event_listener', event: 'makaira.connect.repository', priority: 1000, method: 'addRepository' }
 
   makaira.connect.repository.product.mofifier_list:
     class: Makaira\Connect\Repository\ModifierList
@@ -422,7 +421,7 @@ services:
       $modifiers: '@makaira.connect.repository.variant.mofifier_list'
       $tableTranslator: '@Makaira\Connect\Utils\TableTranslator'
     tags:
-    - { name: 'kernel.event_listener', event: 'makaira.connect.repository', priority: 990, method: 'addRepository' }
+      - { name: 'kernel.event_listener', event: 'makaira.connect.repository', priority: 990, method: 'addRepository' }
 
   makaira.connect.repository.variant.mofifier_list:
     class: Makaira\Connect\Repository\ModifierList
@@ -440,7 +439,7 @@ services:
       $modifiers: '@makaira.connect.repository.category.mofifier_list'
       $tableTranslator: '@Makaira\Connect\Utils\TableTranslator'
     tags:
-    - { name: 'kernel.event_listener', event: 'makaira.connect.repository', priority: 980, method: 'addRepository' }
+      - { name: 'kernel.event_listener', event: 'makaira.connect.repository', priority: 980, method: 'addRepository' }
 
   makaira.connect.repository.category.mofifier_list:
     class: Makaira\Connect\Repository\ModifierList
@@ -458,7 +457,7 @@ services:
       $modifiers: '@makaira.connect.repository.manufacturer.mofifier_list'
       $tableTranslator: '@Makaira\Connect\Utils\TableTranslator'
     tags:
-    - { name: 'kernel.event_listener', event: 'makaira.connect.repository', priority: 970, method: 'addRepository' }
+      - { name: 'kernel.event_listener', event: 'makaira.connect.repository', priority: 970, method: 'addRepository' }
 
   makaira.connect.repository.manufacturer.mofifier_list:
     class: Makaira\Connect\Repository\ModifierList
@@ -471,3 +470,73 @@ services:
   Makaira\Connect\VersionHandler:
     class: Makaira\Connect\VersionHandler
     public: true
+
+  OxidEsales\Eshop\Core\Session:
+    public: true
+    factory: [ 'OxidEsales\Eshop\Core\Registry', 'getSession' ]
+
+  Makaira\Connect\Service\CartService:
+    public: true
+    class: Makaira\Connect\Service\CartService
+    bind:
+      $basket: '@=service("OxidEsales\\Eshop\\Core\\Session").getBasket()'
+
+  Makaira\Connect\Service\ReviewService:
+    public: true
+    class: Makaira\Connect\Service\ReviewService
+
+  Makaira\Connect\Service\UserService:
+    public: true
+    class: Makaira\Connect\Service\UserService
+    bind:
+      $session: '@OxidEsales\Eshop\Core\Session'
+
+  Makaira\Connect\Utils\ModuleSettingsProvider:
+    class: Makaira\Connect\Utils\ModuleSettingsProvider
+    public: true
+    bind:
+      $moduleSettings: '@OxidEsales\EshopCommunity\Internal\Framework\Module\Configuration\Bridge\ModuleSettingBridgeInterface'
+
+  Makaira\Signing\HashGenerator:
+    class: Makaira\Signing\Hash\Sha256
+
+  Makaira\Connect\Rpc\SignatureCheck:
+    class: Makaira\Connect\Rpc\SignatureCheck
+    public: true
+    bind:
+      $hashGenerator: '@Makaira\Signing\HashGenerator'
+      $moduleSettings: '@Makaira\Connect\Utils\ModuleSettingsProvider'
+
+  Makaira\Connect\Rpc\RpcService:
+    public: true
+    bind:
+      $signatureCheck: '@Makaira\Connect\Rpc\SignatureCheck'
+      $rpcHandlers: !tagged makaira_connect.rpc_handler
+
+  Makaira\Connect\Rpc\Handler\ListLanguages:
+    tags: [ 'makaira_connect.rpc_handler' ]
+    bind:
+      $language: '@makaira.connect.oxid.language'
+
+  Makaira\Connect\Entity\RevisionRepository:
+    class: Makaira\Connect\Entity\RevisionRepository
+    public: true
+    bind:
+      $connection: '@Doctrine\DBAL\Connection'
+
+  Makaira\Connect\Rpc\Handler\GetReplicationStatus:
+    tags: [ 'makaira_connect.rpc_handler' ]
+    bind:
+      $repository: '@Makaira\Connect\Entity\RevisionRepository'
+
+  Makaira\Connect\Rpc\Handler\GetUpdates:
+    tags: [ 'makaira_connect.rpc_handler' ]
+    bind:
+      $language: '@makaira.connect.oxid.language'
+      $tableTranslator: '@Makaira\Connect\Utils\TableTranslator'
+      $repository: '@Makaira\Connect\Repository'
+
+  request:
+    public: true
+    class: Symfony\Component\HttpFoundation\Request
+    factory: [ 'Symfony\Component\HttpFoundation\Request', 'createFromGlobals' ]
