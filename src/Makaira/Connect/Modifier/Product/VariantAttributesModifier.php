@@ -87,6 +87,45 @@ class VariantAttributesModifier extends Modifier
     }
 
     /**
+     * @param Type $product
+     *
+     * @return array
+     */
+    public function getVariantData(Type $product)
+    {
+        $variants = [['id' => '']];
+
+        $variantName = $this->database->query(
+            $this->selectVariantNameQuery,
+            [
+                'productId' => $product->id,
+            ],
+            false
+        );
+
+        $single      = ($variantName[0]['oxvarname'] === '');
+
+        if (!$single) {
+            $titleArray = array_map('trim', explode('|', $variantName[0]['oxvarname']));
+            $hashArray  = array_map('md5', $titleArray);
+
+            $query    = str_replace('{{activeSnippet}}', $this->activeSnippet, $this->selectVariantDataQuery);
+            $dbvariants = $this->database->query(
+                $query,
+                [
+                    'productId' => $product->id,
+                ]
+            );
+            if ($dbvariants) {
+                $variants = $dbvariants;
+            }
+        }
+
+        return $variants;
+    }
+
+
+    /**
      * Modify product and return modified product
      *
      * @param BaseProduct|Type $product
@@ -102,29 +141,7 @@ class VariantAttributesModifier extends Modifier
 
         $product->attributes = [];
 
-        $variantName = $this->database->query(
-            $this->selectVariantNameQuery,
-            [
-                'productId' => $product->id,
-            ],
-            false
-        );
-        $single      = ($variantName[0]['oxvarname'] === '');
-
-        if (!$single) {
-            $titleArray = array_map('trim', explode('|', $variantName[0]['oxvarname']));
-            $hashArray  = array_map('md5', $titleArray);
-
-            $query    = str_replace('{{activeSnippet}}', $this->activeSnippet, $this->selectVariantDataQuery);
-            $variants = $this->database->query(
-                $query,
-                [
-                    'productId' => $product->id,
-                ]
-            );
-        } else {
-            $variants = [['id' => '']];
-        }
+        $variants = getVariantData($product);
 
         foreach ($variants as $variant) {
             $id = $variant['id'];
