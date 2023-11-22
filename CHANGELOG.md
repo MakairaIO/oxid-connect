@@ -1,3 +1,10 @@
+## [4.2.3](https://github.com/MakairaIO/oxid-connect/compare/4.2.2...4.2.3) (2023-11-22)
+
+
+### Bug Fixes
+
+* Add fallback for variants ([b2a695a](https://github.com/MakairaIO/oxid-connect/commit/b2a695a99840905c8bdcc2ccba7e7f5037ec95f1))
+
 ## [4.2.2](https://github.com/MakairaIO/oxid-connect/compare/4.2.1...4.2.2) (2023-10-18)
 
 
