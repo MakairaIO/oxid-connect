@@ -16,6 +16,9 @@ use Makaira\Constraints;
 use Makaira\Query;
 use Makaira\Result;
 use Makaira\Connect\Connect;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Makaira\Connect\Event\ModifierQueryRequestEvent;
+use Makaira\Connect\Event\SearchResponseEvent;
 
 /**
  * Class makaira_connect_request_handler
@@ -273,14 +276,29 @@ class makaira_connect_request_handler
 
     protected function modifyRequest(Query $query)
     {
+        $dispatcher = Connect::getContainerFactory()->getContainer()->get(EventDispatcherInterface::class);
+        $dispatcher->dispatch(
+            ModifierQueryRequestEvent::NAME_SEARCH,
+            new ModifierQueryRequestEvent($query)
+        );
+
         return $query;
     }
 
     /**
      * @param array $productIds
      */
-    public function afterSearchRequest(array $productIds = [])
+    public function afterSearchRequest(array &$productIds = [])
     {
+        $searchResponseEvent = new SearchResponseEvent($productIds);
+
+        $dispatcher = Connect::getContainerFactory()->getContainer()->get(EventDispatcherInterface::class);
+        $dispatcher->dispatch(
+            SearchResponseEvent::NAME,
+            $searchResponseEvent
+        );
+
+        $productIds = (array)$searchResponseEvent->getProductIds();
     }
 
     /**

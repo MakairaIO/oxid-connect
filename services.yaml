@@ -112,6 +112,7 @@ services:
       $oxLang: '@makaira.connect.oxid.language'
       $operationalIntelligence: '@Makaira\Connect\Utils\OperationalIntelligence'
       $searchHandler: '@Makaira\Connect\SearchHandler'
+      $dispatcher: '@Symfony\Component\EventDispatcher\EventDispatcherInterface'
 
   # makaira.connect.searchhandler
   Makaira\Connect\SearchHandler:

@@ -10,11 +10,14 @@
 
 namespace Makaira\Connect\Core;
 
+use Makaira\Connect\Event\ModifierQueryRequestEvent;
+use Makaira\Connect\Event\AutoSuggesterResponseEvent;
 use oxLang as Language;
 use Makaira\Connect\SearchHandler;
 use Makaira\Connect\Utils\OperationalIntelligence;
 use Makaira\Constraints;
 use Makaira\Query;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class makaira_connect_autosuggester
@@ -36,14 +39,21 @@ class Autosuggester
      */
     private $searchHandler;
 
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $dispatcher;
+
     public function __construct(
         Language $oxLang,
         OperationalIntelligence $operationalIntelligence,
-        SearchHandler $searchHandler
+        SearchHandler $searchHandler,
+        EventDispatcherInterface $dispatcher
     ) {
         $this->oxLang = $oxLang;
         $this->operationalIntelligence = $operationalIntelligence;
         $this->searchHandler = $searchHandler;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -373,6 +383,10 @@ class Autosuggester
      */
     public function modifyRequest(Query &$query)
     {
+        $this->dispatcher->dispatch(
+            ModifierQueryRequestEvent::NAME_AUTOSUGGESTER,
+            new ModifierQueryRequestEvent($query)
+        );
     }
 
     /**
@@ -380,5 +394,11 @@ class Autosuggester
      */
     public function afterSearchRequest(&$result)
     {
+        $event = new AutoSuggesterResponseEvent($result);
+        $this->dispatcher->dispatch(
+            AutoSuggesterResponseEvent::NAME,
+            $event
+        );
+        $result = (array)$event->getResult();
     }
 }

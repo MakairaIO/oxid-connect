@@ -77,6 +77,8 @@ class oxRegistry
             case 'oxseoencodercategory':
             case 'oxseoencodermanufacturer':
                 return new oxSeoEncoder();
+            case 'makaira_cookie_utils':
+                return new makaira_cookie_utils();
         }
 
         return null;
