@@ -1,3 +1,10 @@
+## [4.2.4](https://github.com/MakairaIO/oxid-connect/compare/4.2.3...4.2.4) (2024-01-09)
+
+
+### Bug Fixes
+
+* Change method call ([#57](https://github.com/MakairaIO/oxid-connect/issues/57)) ([bd1694e](https://github.com/MakairaIO/oxid-connect/commit/bd1694e5e18a44913f56dbd1b033504d41b63939))
+
 ## [4.2.3](https://github.com/MakairaIO/oxid-connect/compare/4.2.2...4.2.3) (2023-11-22)
 
 
