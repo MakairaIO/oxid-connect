@@ -24,3 +24,10 @@ if (!function_exists('oxNew')) {
 if (!class_exists('OxidEsales\\EshopCommunity\\Internal\\Container\\ContainerFactory')) {
     require_once __DIR__ . '/Makaira/Connect/OxidMocks/ContainerFactory.php';
 }
+
+if (!function_exists('str_contains')) {
+    function str_contains(string $haystack, string $needle): bool
+    {
+        return $needle !== '' && mb_strpos($haystack, $needle) !== false;
+    }
+}

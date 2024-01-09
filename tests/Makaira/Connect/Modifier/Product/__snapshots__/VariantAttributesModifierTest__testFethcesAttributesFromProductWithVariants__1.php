@@ -1,44 +1,4 @@
-<?php return \Makaira\Connect\Type\Product\Product::__set_state(array(
-   'es_id' => NULL,
-   'id' => 'phpunit_product',
-   'timestamp' => NULL,
-   'url' => NULL,
-   'active' => true,
-   'shop' => 
-  array (
-  ),
-   'additionalData' => 
-  array (
-  ),
-   'attributeStr' => 
-  array (
-  ),
-   'attributeInt' => 
-  array (
-  ),
-   'attributeFloat' => 
-  array (
-  ),
-   'isPseudo' => false,
-   'ean' => '',
-   'title' => '',
-   'searchkeys' => '',
-   'hidden' => false,
-   'sort' => 0,
-   'longdesc' => '',
-   'shortdesc' => '',
-   'stock' => 0,
-   'onstock' => false,
-   'manufacturerid' => '',
-   'manufacturer_title' => '',
-   'price' => 0.0,
-   'insert' => NULL,
-   'soldamount' => 0,
-   'rating' => 0.0,
-   'searchable' => true,
-   'picture_url_main' => 
-  array (
-  ),
+<?php return Makaira\Connect\Type\Product\Product::__set_state(array(
    'attributes' => 
   array (
     0 => 
@@ -105,6 +65,46 @@
   array (
   ),
    'tmpAttributeFloat' => 
+  array (
+  ),
+   'attributeStr' => 
+  array (
+  ),
+   'attributeInt' => 
+  array (
+  ),
+   'attributeFloat' => 
+  array (
+  ),
+   'isPseudo' => false,
+   'ean' => '',
+   'title' => '',
+   'searchkeys' => '',
+   'hidden' => false,
+   'sort' => 0,
+   'longdesc' => '',
+   'shortdesc' => '',
+   'stock' => 0,
+   'onstock' => false,
+   'manufacturerid' => '',
+   'manufacturer_title' => '',
+   'price' => 0.0,
+   'insert' => NULL,
+   'soldamount' => 0,
+   'rating' => 0.0,
+   'searchable' => true,
+   'picture_url_main' => 
+  array (
+  ),
+   'es_id' => NULL,
+   'id' => 'phpunit_product',
+   'timestamp' => NULL,
+   'url' => NULL,
+   'active' => true,
+   'shop' => 
+  array (
+  ),
+   'additionalData' => 
   array (
   ),
 ));
