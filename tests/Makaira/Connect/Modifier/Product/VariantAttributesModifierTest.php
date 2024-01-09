@@ -36,13 +36,12 @@ class VariantAttributesModifierTest extends TestCase
      *
      * @return void
      * @throws ConnectException
-     * @dataProvider provideDbCallback
      */
-    public function testFethcesAttributes(string $dbCallback)
+    public function testFethcesAttributesFromProductWithVariants()
     {
         $dbMock = $this->createMock(DatabaseInterface::class);
         $dbMock->method('query')
-            ->willReturnCallback([$this, $dbCallback]);
+            ->willReturnCallback([$this, 'productWithVariantsCallback']);
 
         $modifier = new VariantAttributesModifier(
             $dbMock,
@@ -57,12 +56,29 @@ class VariantAttributesModifierTest extends TestCase
         $this->assertMatchesSnapshot($product);
     }
 
-    public function provideDbCallback()
+    /**
+     * @param string $dbCallback
+     *
+     * @return void
+     * @throws ConnectException
+     */
+    public function testFethcesAttributesFromProductWithoutVariants()
     {
-        return [
-            'Product with variants' => ['productWithVariantsCallback'],
-            'Product without variants' => ['productWithoutVariantsCallback'],
-        ];
+        $dbMock = $this->createMock(DatabaseInterface::class);
+        $dbMock->method('query')
+            ->willReturnCallback([$this, 'productWithoutVariantsCallback']);
+
+        $modifier = new VariantAttributesModifier(
+            $dbMock,
+            'OXACTIVE = 1',
+            ['intAttr', '111ebeb2f08072eef3b164f0dc7ab653'],
+            ['floatAttr', '01aa4923c4110ef347161f848a9d36aa']
+        );
+
+        $product = new Product(['id' => 'phpunit_product']);
+        $modifier->apply($product);
+
+        $this->assertMatchesSnapshot($product);
     }
 
     public function productWithVariantsCallback(...$args)
