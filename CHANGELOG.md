@@ -1,3 +1,10 @@
+## [2.12.6](https://github.com/MakairaIO/oxid-connect/compare/2.12.5...2.12.6) (2024-01-09)
+
+
+### Bug Fixes
+
+* Change method call ([#59](https://github.com/MakairaIO/oxid-connect/issues/59)) ([727fac0](https://github.com/MakairaIO/oxid-connect/commit/727fac0c12fcb3fc98a660e35a03d5cb532c6e06))
+
 ## [2.12.5](https://github.com/MakairaIO/oxid-connect/compare/2.12.4...2.12.5) (2023-11-21)
 
 
