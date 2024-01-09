@@ -45,4 +45,9 @@ class Type
     {
         unset($this->additionalData[$name]);
     }
+
+    public static function __set_state(array $args)
+    {
+        return new static($args);
+    }
 }
