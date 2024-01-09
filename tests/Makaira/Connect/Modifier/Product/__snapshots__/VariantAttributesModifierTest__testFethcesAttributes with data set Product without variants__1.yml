@@ -1,0 +1,50 @@
+attributes:
+    - { intAttr: 1337, floatAttr: 13.37, stringAttr: phpunit }
+parent: ''
+meta_keywords: null
+meta_description: null
+selfLinks: {  }
+maincategory: null
+maincategoryurl: null
+mak_boost_norm_insert: 0.0
+mak_boost_norm_sold: 0.0
+mak_boost_norm_rating: 0.0
+mak_boost_norm_revenue: 0.0
+mak_boost_norm_profit_margin: 0.0
+isVariant: false
+activeto: null
+activefrom: null
+suggest: {  }
+category: {  }
+TRACKING: null
+tmpAttributeStr: {  }
+tmpAttributeInt: {  }
+tmpAttributeFloat: {  }
+attributeStr: {  }
+attributeInt: {  }
+attributeFloat: {  }
+isPseudo: false
+ean: ''
+title: ''
+searchkeys: ''
+hidden: false
+sort: 0
+longdesc: ''
+shortdesc: ''
+stock: 0
+onstock: false
+manufacturerid: ''
+manufacturer_title: ''
+price: 0.0
+insert: null
+soldamount: 0
+rating: 0.0
+searchable: true
+picture_url_main: {  }
+es_id: null
+id: phpunit_product
+timestamp: null
+url: null
+active: true
+shop: {  }
+additionalData: {  }
