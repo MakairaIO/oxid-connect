@@ -4,18 +4,18 @@ namespace Makaira\Connect\Modifier\Product;
 
 use Makaira\Connect\DatabaseInterface;
 use Makaira\Connect\Exception as ConnectException;
-use Makaira\Connect\AssertSnapshotTrait;
 use Makaira\Connect\Type;
 use Makaira\Connect\Type\Product\Product;
 use PHPUnit\Framework\TestCase;
+
+use Spatie\Snapshots\MatchesSnapshots;
 
 use function str_contains;
 
 class VariantAttributesModifierTest extends TestCase
 {
-    use AssertSnapshotTrait;
+    use MatchesSnapshots;
 
-    // VariantAttributesModifierTest__testThrowsExceptionIfProductIdIsNotSet
     public function testThrowsExceptionIfProductIdIsNotSet()
     {
         $modifier = new VariantAttributesModifier(
@@ -54,7 +54,7 @@ class VariantAttributesModifierTest extends TestCase
         $product = new Product(['id' => 'phpunit_product']);
         $modifier->apply($product);
 
-        $this->assertJsonSnapshot($product);
+        $this->assertMatchesSnapshot($product);
     }
 
     public function provideDbCallback()
