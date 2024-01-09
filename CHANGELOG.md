@@ -1,3 +1,10 @@
+## [3.1.4](https://github.com/MakairaIO/oxid-connect/compare/3.1.3...3.1.4) (2024-01-09)
+
+
+### Bug Fixes
+
+* Change method call ([cadb3c4](https://github.com/MakairaIO/oxid-connect/commit/cadb3c4b3d28494b26618fa12bf01108099ed68f))
+
 ## [3.1.3](https://github.com/MakairaIO/oxid-connect/compare/3.1.2...3.1.3) (2023-11-22)
 
 
