@@ -5,7 +5,6 @@ namespace Makaira\Connect\Modifier\Product;
 use Makaira\Connect\DatabaseInterface;
 use Makaira\Connect\Modifier;
 use Makaira\Connect\Type;
-use Makaira\Connect\Type\Common\AssignedTypedAttribute;
 use Makaira\Connect\Type\Common\BaseProduct;
 use Makaira\Connect\Exception as ConnectException;
 
@@ -61,12 +60,12 @@ class VariantAttributesModifier extends Modifier
     /**
      * @var array
      */
-    private $attributeInt = [];
+    private $attributeInt;
 
     /**
      * @var array
      */
-    private $attributeFloat = [];
+    private $attributeFloat;
 
     /**
      * @param DatabaseInterface $database
@@ -103,25 +102,26 @@ class VariantAttributesModifier extends Modifier
             false
         );
 
-        $single      = ($variantName[0]['oxvarname'] === '');
+        $single    = ($variantName[0]['oxvarname'] === '');
+        $hashArray = [];
 
         if (!$single) {
             $titleArray = array_map('trim', explode('|', $variantName[0]['oxvarname']));
             $hashArray  = array_map('md5', $titleArray);
 
             $query    = str_replace('{{activeSnippet}}', $this->activeSnippet, $this->selectVariantDataQuery);
-            $dbvariants = $this->database->query(
+            $dbVariants = $this->database->query(
                 $query,
                 [
                     'productId' => $product->id,
                 ]
             );
-            if ($dbvariants) {
-                $variants = $dbvariants;
+            if ($dbVariants) {
+                $variants = $dbVariants;
             }
         }
 
-        return $variants;
+        return [$variants, $hashArray];
     }
 
 
@@ -141,7 +141,7 @@ class VariantAttributesModifier extends Modifier
 
         $product->attributes = [];
 
-        $variants = getVariantData($product);
+        [$variants, $hashArray] = $this->getVariantData($product);
 
         foreach ($variants as $variant) {
             $id = $variant['id'];
