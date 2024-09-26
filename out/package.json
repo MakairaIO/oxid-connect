@@ -35,6 +35,6 @@
     "watchify": "^4.0.0"
   },
   "dependencies": {
-    "nouislider": "^10.1.0"
+    "nouislider": "^11.1.0"
   }
 }
