@@ -57,5 +57,7 @@ class TouchAllCommand extends Command
         $repo->touchAll($input->getOption('shop-id'));
 
         $output->writeln('Done.');
+
+        return 0;
     }
 }

@@ -54,5 +54,7 @@ class DebugChangeCommand extends Command
         } else {
             var_dump($changes);
         }
+
+        return 0;
     }
 }
