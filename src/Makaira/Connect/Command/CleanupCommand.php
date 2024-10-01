@@ -35,5 +35,7 @@ class CleanupCommand extends Command
         $repo->cleanup();
 
         $output->writeln('Done.');
+
+        return 0;
     }
 }
