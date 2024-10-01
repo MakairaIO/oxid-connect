@@ -1,3 +1,11 @@
+## [4.2.5](https://github.com/MakairaIO/oxid-connect/compare/4.2.4...4.2.5) (2024-10-01)
+
+
+### Bug Fixes
+
+* **TouchAll:** Set compatible return value ([182fd93](https://github.com/MakairaIO/oxid-connect/commit/182fd93c8a99dbcba87e2444e167a01c8d314bde))
+* **TouchAll:** Set compatible return value ([272e564](https://github.com/MakairaIO/oxid-connect/commit/272e564b8addbd9235529d0f64045baea56b9bca))
+
 ## [4.2.4](https://github.com/MakairaIO/oxid-connect/compare/4.2.3...4.2.4) (2024-01-09)
 
 
