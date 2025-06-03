@@ -388,7 +388,7 @@ class makaira_connect_request_handler
                     break;
                 default:
                     $aggregations[$aggregation->key]->values         = array_map(
-                        function ($value) use ($aggregation, $query) {
+                        static function ($value) use ($aggregation, $query) {
                             $valueObject           = new stdClass();
                             $valueObject->key      = $value['key'];
                             $valueObject->count    = $value['count'];
@@ -397,11 +397,12 @@ class makaira_connect_request_handler
                                 $valueObject->selected = in_array(
                                     strtolower($valueObject->key),
                                     array_map(
-                                        function ($element) {
+                                        static function ($element) {
                                             return is_bool($element) ? $element : strtolower($element);
                                         },
                                         (array) $query->aggregations[$aggregation->key]
-                                    )
+                                    ),
+                                    false
                                 );
                             }
 
@@ -409,10 +410,17 @@ class makaira_connect_request_handler
                         },
                         $aggregation->values
                     );
-                    $aggregations[$aggregation->key]->selectedValues =
-                        isset($query->aggregations[$aggregation->key]) ? $query->aggregations[$aggregation->key] : [];
+
+                    $aggregations[$aggregation->key]->selectedValues = $query->aggregations[$aggregation->key] ?? [];
             }
         }
+
+        uasort(
+            $aggregations,
+            static function ($filter1, $filter2) {
+                return ($filter1->position ?? 0) <=> ($filter2->position ?? 0);
+            }
+        );
 
         return $aggregations;
     }
