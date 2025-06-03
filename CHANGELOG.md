@@ -1,3 +1,10 @@
+# [2.13.0](https://github.com/MakairaIO/oxid-connect/compare/2.12.6...2.13.0) (2025-06-03)
+
+
+### Features
+
+* **Filter:** Add filter sorting ([#63](https://github.com/MakairaIO/oxid-connect/issues/63)) ([b086da4](https://github.com/MakairaIO/oxid-connect/commit/b086da4954c9acd0e609852325b4d53db7da20db))
+
 ## [2.12.6](https://github.com/MakairaIO/oxid-connect/compare/2.12.5...2.12.6) (2024-01-09)
 
 
