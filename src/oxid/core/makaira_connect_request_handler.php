@@ -65,7 +65,13 @@ class makaira_connect_request_handler
 
         /** @var OperationalIntelligence $operationalIntelligence */
         $operationalIntelligence = $container->get(OperationalIntelligence::class);
-        $operationalIntelligence->apply($query);
+        if (oxRegistry::getConfig()->getShopConfVar(
+            'makaira_connect_personalization_enabled',
+            null,
+            oxConfig::OXMODULE_MODULE_PREFIX . 'makaira/connect'
+        )) {
+            $operationalIntelligence->apply($query);
+        }
 
         $unmodifiedQuery = clone($query);
 
