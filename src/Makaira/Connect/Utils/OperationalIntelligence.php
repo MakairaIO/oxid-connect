@@ -28,10 +28,12 @@ class OperationalIntelligence
 
     public function apply(AbstractQuery $query)
     {
-        $query->constraints[ Constraints::OI_USER_AGENT ]    = $this->getUserAgentString();
-        $query->constraints[ Constraints::OI_USER_IP ]       = $this->anonymizeIp($this->getUserIP());
-        $query->constraints[ Constraints::OI_USER_ID ]       = $this->generateUserID();
-        $query->constraints[ Constraints::OI_USER_TIMEZONE ] = $this->getUserTimeZone();
+        if ($this->cookieUtils->isPersonalizationEnabled()) {
+            $query->constraints[Constraints::OI_USER_AGENT]    = $this->getUserAgentString();
+            $query->constraints[Constraints::OI_USER_IP]       = $this->anonymizeIp($this->getUserIP());
+            $query->constraints[Constraints::OI_USER_ID]       = $this->generateUserID();
+            $query->constraints[Constraints::OI_USER_TIMEZONE] = $this->getUserTimeZone();
+        }
     }
 
     /**
