@@ -21,8 +21,8 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.1'
-          tools: composer:v1
+          php-version: '7.4'
+          tools: composer:v2
 
       - name: Install dependencies
         run: composer install
