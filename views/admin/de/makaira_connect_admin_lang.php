@@ -19,6 +19,8 @@ $aLang = [
     'SHOP_MODULE_makaira_connect_url_param'            => 'Name des URL-Parameters für die Filter',
 
     'SHOP_MODULE_GROUP_OPERATIONAL_INTELLIGENCE'    => 'Personalisierung',
+    'SHOP_MODULE_makaira_connect_personalization_enabled'      => 'Personalisierung aktivieren',
+    'HELP_SHOP_MODULE_makaira_connect_personalization_enabled' => 'Wenn <strong>deaktiviert</strong>, wird das Setzen von OI-Constraint Cookies blockiert.',
     'SHOP_MODULE_makaira_connect_use_econda'        => 'Econda Unterstützung aktivieren',
     'HELP_SHOP_MODULE_makaira_connect_use_econda'   => 'Bitte tragen Sie Ihre Econda Zugangsdaten ein um die Suchergebnisse mittel Econda zu sortieren.',
     'SHOP_MODULE_makaira_connect_econda_aid'        => 'Econda Account ID',

@@ -4,6 +4,8 @@ class makaira_cookie_utils
 {
     private static $bannerEnabled;
 
+    const PERSONALIZATION_COOKIES = ['oiID','oiLocalTimeZone'];
+
     public function hasCookiesAccepted()
     {
         if (null === self::$bannerEnabled) {
@@ -35,6 +37,10 @@ class makaira_cookie_utils
         $secure = false,
         $httpOnly = true
     ) {
+        if (in_array($name, self::PERSONALIZATION_COOKIES, true) && !$this->isPersonalizationEnabled()) {
+            return false;
+        }
+
         if ($this->hasCookiesAccepted()) {
             /** @var oxUtilsServer $oxidServerUtils */
             $oxidServerUtils = oxRegistry::get('oxutilsserver');
@@ -52,5 +58,20 @@ class makaira_cookie_utils
         }
 
         return false;
+    }
+
+    /**
+     * Return whether personalization cookies are enabled in module settings.
+     * Default: true (unless admin turned it off).
+     *
+     * @return bool
+     */
+    public function isPersonalizationEnabled()
+    {
+        return (bool) oxRegistry::getConfig()->getShopConfVar(
+            'makaira_connect_personalization_enabled',
+            null,
+            oxConfig::OXMODULE_MODULE_PREFIX . 'makaira/connect'
+        );
     }
 }
