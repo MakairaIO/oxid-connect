@@ -1,3 +1,10 @@
+# [2.14.0](https://github.com/MakairaIO/oxid-connect/compare/2.13.0...2.14.0) (2025-12-05)
+
+
+### Features
+
+* **Settings:** Add opt-out to personalization feature ([#65](https://github.com/MakairaIO/oxid-connect/issues/65)) ([3967408](https://github.com/MakairaIO/oxid-connect/commit/396740852eb3c77020dbfbaf786c338c6a9f06df))
+
 # [2.13.0](https://github.com/MakairaIO/oxid-connect/compare/2.12.6...2.13.0) (2025-06-03)
 
 
