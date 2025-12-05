@@ -1,3 +1,15 @@
+# [4.4.0](https://github.com/MakairaIO/oxid-connect/compare/4.3.0...4.4.0) (2025-12-05)
+
+
+### Bug Fixes
+
+* **Composer:** Ignore security advisories, due to fixed version requirements in OXID packages ([#69](https://github.com/MakairaIO/oxid-connect/issues/69)) ([5f9ef1b](https://github.com/MakairaIO/oxid-connect/commit/5f9ef1b34cac2d74b6d3d3398fe8766c317dd1d4))
+
+
+### Features
+
+* **Settings:** Add opt-out to personalization feature ([#64](https://github.com/MakairaIO/oxid-connect/issues/64)) ([9241200](https://github.com/MakairaIO/oxid-connect/commit/92412009a4d6e4315409d98d2d3b1ba2cfb21e97))
+
 # [4.3.0](https://github.com/MakairaIO/oxid-connect/compare/4.2.5...4.3.0) (2025-06-03)
 
 
