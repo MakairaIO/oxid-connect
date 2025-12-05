@@ -155,6 +155,12 @@ $aModule = [
             'type'  => 'bool',
             'value' => true,
         ],
+        [
+            'group' => 'OPERATIONAL_INTELLIGENCE',
+            'name'  => 'makaira_connect_personalization_enabled',
+            'type'  => 'bool',
+            'value' => true,
+        ],
         ['name'  => 'makaira_connect_use_odoscope',
          'group' => 'OPERATIONAL_INTELLIGENCE',
          'type'  => 'bool',
