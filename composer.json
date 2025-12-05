@@ -67,6 +67,10 @@
       "composer/installers": true,
       "oxid-esales/oxideshop-unified-namespace-generator": false,
       "oxid-esales/oxideshop-composer-plugin": false
+    },
+    "audit": {
+      "block-abandoned": false,
+      "block-insecure": false
     }
   }
 }
