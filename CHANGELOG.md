@@ -1,3 +1,10 @@
+# [4.5.0](https://github.com/MakairaIO/oxid-connect/compare/4.4.0...4.5.0) (2026-02-12)
+
+
+### Features
+
+* Add PHP 8.2 to requirement list ([#72](https://github.com/MakairaIO/oxid-connect/issues/72)) ([083d0a5](https://github.com/MakairaIO/oxid-connect/commit/083d0a5780018e2b15c1cd093976459498de5322))
+
 # [4.4.0](https://github.com/MakairaIO/oxid-connect/compare/4.3.0...4.4.0) (2025-12-05)
 
 
